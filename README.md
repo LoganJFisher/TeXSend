@@ -18,9 +18,10 @@ This requires the use of browser script manager. I recommend Violentmonkey.
   * [(; ... ;)]
   * $$ ... $$ 
   * \[ ... \]
+  * \begin{displaymath} ... \end{displaymath}
+  * \begin{equation} ... \end{equation}
 
 **Planned features:**
-* \begin{displaymath} and \begin{equation} display delimiters
 * Tables
 * Packages
 * TikZ
