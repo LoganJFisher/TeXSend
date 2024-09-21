@@ -1,4 +1,5 @@
 This userscript adds a "TeX" button to the action bar at the top of an open email on https://mail.google.com. When clicked, this causes TeX code within a list of accepted delimiters to toggle between rendered and plaintext states.
+Standard equation elements & matrices are supported.
 
 This requires the use of browser script manager. I recommend Violentmonkey.
 * [Chrome](https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag)
@@ -17,9 +18,9 @@ This requires the use of browser script manager. I recommend Violentmonkey.
   * \[ ... \]
 
 **Planned features:**
-* Support for \begin{displaymath} and \begin{equation} delimiters
-* Matrices
+* \begin{displaymath} and \begin{equation} display delimiters
 * Tables
+* Packages
 * TikZ
 
 ---
