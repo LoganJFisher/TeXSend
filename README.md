@@ -12,6 +12,7 @@ This requires the use of browser script manager. I recommend Violentmonkey, but 
 * [Chrome](https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag)
 * [Firefox](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/)
 * [Edge](https://microsoftedge.microsoft.com/addons/detail/violentmonkey/eeagobfjdenkkddmbclomhiblgggliao)
+* I expect that this userscript should also be compatible with all other browsers, including Safari, Opera, Explorer, etc.
 
 ---
 
