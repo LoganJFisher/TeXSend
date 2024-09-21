@@ -29,7 +29,7 @@ function renderLatex(html) {
     ];
 
     katexReplaceList.forEach( ([regex, display]) => {
-        html = html.replace(regex, (m, p) => katex.renderToString(p, {throwOnError: false, output: "mathml", displayMode: display, strict: true});
+        html = html.replace(regex, (m, p) => katex.renderToString(p, {throwOnError: false, output: "mathml", displayMode: display}));
     });
 
     return html;
