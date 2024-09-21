@@ -5,7 +5,7 @@
 // @grant       GM_registerMenuCommand
 // @grant       GM_addElement
 // @require     https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js
-// @version     3.4
+// @version     3.5
 // @author      Logan J. Fisher & GTK & MistralMireille
 // @description Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
 // @noframes
@@ -22,9 +22,9 @@ function renderLatex(html) {
         [/\\\[(.+?)\\\]/g, true],
         [/\\\((.+?)\\\)/g, false],
         [/\${1,2}(.+?)\${1,2}/g, false],
-        [/\\begin\{math}(.+?)\\end\{math}/g, false]
-        //[/\\begin\{equation}(.+?)\\end\{equation}/g, true] //These two doesn't work, and actually seems to break the userscript entirely when uncommented. No clue why.
-        //[/\\begin\{displaymath}(.+?)\\end\{displaymath}/g, true]
+        [/\\begin\{math}(.+?)\\end\{math}/g, false],
+        [/\\begin\{equation}(.+?)\\end\{equation}/g, true],
+        [/\\begin\{displaymath}(.+?)\\end\{displaymath}/g, true]
     ];
 
     const div = document.createElement('div');
