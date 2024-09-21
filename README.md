@@ -18,10 +18,10 @@ This requires the use of browser script manager. I recommend Violentmonkey.
   * [(; ... ;)]
   * $$ ... $$ 
   * \[ ... \]
-  * \begin{displaymath} ... \end{displaymath}
-  * \begin{equation} ... \end{equation}
 
-**Planned features:**
+**If you would like to contribute, I'm currently hoping to add these features:**
+* \begin{displaymath} ... \end{displaymath} (currently disabled due to causing instability)
+* \begin{equation} ... \end{equation} (currently disabled due to causing instability)
 * Tables
 * Packages
 * TikZ
