@@ -1,0 +1,110 @@
+// ==UserScript==
+// @name        LaTeX for Gmail
+// @namespace   Violentmonkey Scripts
+// @match       https://mail.google.com/mail/*
+// @grant       GM_registerMenuCommand
+// @grant       GM_addElement
+// @require     https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js
+// @version     3.1
+// @author      Logan J. Fisher & GTK & MistralMireille
+// @description Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
+// @noframes
+// ==/UserScript==
+
+/* globals katex */
+
+let LATEX_TOGGLE_STATE = true;
+
+function renderLatex(html) {
+    const katexReplaceList = [
+        [/\[;(.+?);\]/g, false],
+        [/\[\(;(.+?);\)\]/g, true],
+        [/\\\[(.+?)\\\]/g, true],
+        [/\$\$(.+?)\$\$/g, true],
+        [/\\\((.+?)\\\)/g, false],
+        [/\$(.+?)\$/g, false],
+        [/\\begin\{math}(.+?)\\end\{math}/g, false]
+        //[/\\begin\{equation}(.+?)\\end\{equation}/g, true] //These two doesn't work, and actually seems to break the userscript entirely when uncommented. No clue why.
+        //[/\\begin\{displaymath}(.+?)\\end\{displaymath}/g, true]
+    ];
+
+    katexReplaceList.forEach( ([regex, display]) => {
+        html = html.replace(regex, (m, p) => katex.renderToString(p, {throwOnError: false, output: "mathml", displayMode: display, strict: true});
+    });
+
+    return html;
+
+}
+
+function refreshLatex(){
+    const messages = document.querySelectorAll("#\\:1 [role=list] > [role=listitem][aria-expanded=true]");
+    messages.forEach(message => {
+        let subportion = message.querySelector("[data-message-id] > div > div > div[id^=':'][jslog]");
+        message = subportion || message;
+        message.oldHTML = message.oldHTML || message.innerHTML;
+
+        message.innerHTML = LATEX_TOGGLE_STATE ? renderLatex(message.innerHTML) : message.oldHTML;
+    });
+}
+
+function toggleLatex() {
+    LATEX_TOGGLE_STATE = !LATEX_TOGGLE_STATE;
+    refreshLatex();
+}
+
+function waitForElement(queryString) {
+    let count = 0;
+    return new Promise((resolve, reject) => {
+        let findInterval = setInterval(() => {
+            let waitElement = document.querySelector(queryString);
+            if(waitElement) {
+                clearInterval(findInterval);
+                resolve(waitElement);
+            } else if(count > 20) {
+                clearInterval(findInterval);
+                reject(`Couldn't find waitElement: ${queryString}.`);
+            } else {
+                count += 1;
+            }
+        }, 100);
+    });
+}
+
+window.addEventListener('load', () => {
+    waitForElement("div#\\:3").then(messagesDiv => {
+        GM_registerMenuCommand('Toggle LaTeX', toggleLatex);
+        messagesDiv.addEventListener('click', refreshLatex);
+        const target = document.querySelector('div#\\:4');
+        const observer = new MutationObserver( () => { refreshLatex(); addButton() });
+        observer.observe(target, {attributes: false, childList: true, subtree: false});
+    });
+});
+
+
+function addButton() {
+    const moveBtn = document.querySelector('div#\\:4 div[title="Move to"]');
+    if (!moveBtn) return;
+
+    GM_addElement(moveBtn.parentElement, 'div', {
+        id: 'LatexButton',
+        role: 'button',
+        style: 'cursor: pointer; margin: 0 12px 0 12px;',
+        'aria-label': 'Toggle LaTeX',
+        'data-tooltip': 'Toggle LaTeX',
+        textContent: 'TeX'
+    });
+
+    const latexButton = document.querySelector('#LatexButton');
+    latexButton.addEventListener('click', toggleLatex);
+}
+
+if (window.trustedTypes && window.trustedTypes.createPolicy && !window.trustedTypes.defaultPolicy) {
+    window.trustedTypes.createPolicy('default', {
+        createHTML: string => string
+    });
+}
+
+GM_addElement('link', {
+    rel: "stylesheet",
+    src: "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.css"
+});
