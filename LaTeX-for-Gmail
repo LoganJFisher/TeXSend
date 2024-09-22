@@ -8,7 +8,7 @@
 // @version     4.1.0 //First number for major changes, second for minor functionality improvements, third for bug fixes.
 // @author      Logan J. Fisher & GTK & MistralMireille
 // @description Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
-// @downloadURL https://github.com/LoganJFisher/LaTeX-for-Gmail/blob/ea595a22c13a4189ff8557f04960ce452f0262d8/LaTeX-for-Gmail
+// @downloadURL https://github.com/LoganJFisher/LaTeX-for-Gmail/blob/main/LaTeX-for-Gmail
 // @noframes
 // ==/UserScript==
 
