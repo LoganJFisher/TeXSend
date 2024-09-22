@@ -24,15 +24,15 @@ This requires the use of browser script manager. I recommend Violentmonkey, but 
   * [(; ... ;)]
   * $$ ... $$ 
   * \[ ... \]
+  * \begin{displaymath} ... \end{displaymath}
+  * \begin{equation} ... \end{equation}
  
  ---
 
 **If you would like to contribute, I'm currently hoping to add these features:**
-* \begin{displaymath} ... \end{displaymath} (currently works on some systems, but not others - unclear why)
-* \begin{equation} ... \end{equation} (currently works on some systems, but not others - unclear why)
+* Improve compatibility with long math arguments
 * Packages
 * TikZ
-
 ---
 
 I would like to extend thanks to the [KaTeX organization](https://katex.org/) - without which, this would not be possible.
