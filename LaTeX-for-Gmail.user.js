@@ -87,13 +87,23 @@ function waitForElement(queryString) {
 }
 
 
-waitForElement("div#\\:3").then(messagesDiv => {
-    GM_registerMenuCommand('Toggle LaTeX', toggleLatex);
-    messagesDiv.addEventListener('click', refreshLatex);
-});
+function observeMessages() {
+    const messageList = document.querySelector("#\\:1 div[role=list]");
+    if (!messageList) return;
+
+    const messages = messageList.querySelectorAll('div[role=listitem]');
+    const observer = new MutationObserver(refreshLatex);
+    messages.forEach( msg => observer.observe(msg, {attributes: true, attributeFilter: ["aria-expanded"]}) );
+}
+
 
 waitForElement("div#\\:4").then(topbar => {
-    const observer = new MutationObserver( () => { refreshLatex(); addButton() });
+    GM_registerMenuCommand('Toggle LaTeX', toggleLatex);
+    const observer = new MutationObserver( () => {
+        refreshLatex();
+        addButton();
+        observeMessages();
+    });
     observer.observe(topbar, {attributes: false, childList: true, subtree: false});
 });
 
