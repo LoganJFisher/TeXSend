@@ -5,7 +5,7 @@
 // @grant       GM_registerMenuCommand
 // @grant       GM_addElement
 // @require     https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js
-// @version     3.8
+// @version     3.9
 // @author      Logan J. Fisher & GTK & MistralMireille
 // @description Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
 // @noframes
@@ -15,29 +15,36 @@
 
 let LATEX_TOGGLE_STATE = true;
 
+const DISPLAY_DELIMS = ['[(; ... ;)]', '$$ ... $$', '\\[ ... \\]', '\\begin{equation} ... \\end{equation}', '\\begin{displaymath} ... \\end{displaymath}'];
+const INLINE_DELIMS = ['[; ... ;]', '$ ... $', '\\( ... \\)', '\\begin{math} ... \\end{math}'];
+
+const DISPLAY_REGEX = buildRegex(DISPLAY_DELIMS);
+const INLINE_REGEX = buildRegex(INLINE_DELIMS);
+
+function buildRegex(delims) {
+    const escape = string => string.replace(/[${}()[\]\\]/g, '\\$&');
+    const start = delims.map( d => escape(d.split('...')[0].trim()) );
+    const end = delims.map( d => escape(d.split('...')[1].trim()) );
+
+    return new RegExp(`(${start.join('|')})(.+?)(${end.join('|')})`, 'g');
+}
+
+
 function renderLatex(html) {
     const katexReplaceList = [
-        [/\[;(.+?);\]/g, false],
-        [/\[\(;(.+?);\)\]/g, true],
-        [/\\\[(.+?)\\\]/g, true],
-        [/\\\((.+?)\\\)/g, false],
-        [/\${2}(.+?)\${2}/g, true],
-        [/\$(.+?)\$/g, false],
-        [/\\begin\{math}(.+?)\\end\{math}/g, false],
-        [/\\begin\{equation}(.+?)\\end\{equation}/g, true], //This and the next delimiter may not work on all computers. It's unclear why that is.
-        [/\\begin\{displaymath}(.+?)\\end\{displaymath}/g, true]
+        [DISPLAY_REGEX, true],
+        [INLINE_REGEX, false],
     ];
 
     const div = document.createElement('div');
     katexReplaceList.forEach( ([regex, display]) => {
-        html = html.replace(regex, (m, p) => {
-            div.innerHTML = p;
+        html = html.replace(regex, (m, p1, p2) => {
+            div.innerHTML = p2;
             return katex.renderToString(div.textContent, {throwOnError: false, output: "mathml", displayMode: display})
         });
     });
 
     return html;
-
 }
 
 function refreshLatex(){
