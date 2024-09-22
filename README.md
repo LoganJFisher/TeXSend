@@ -2,8 +2,6 @@
 
 Standard equation elements & matrices are supported.
 
-If the TeX button doesn't appear, try going back to the Gmail home page then going back to the email. This should trigger the load event listener.
-
 It should be noted that the render is only on your end. The recipient of an email will also need to be running this userscript in order to render on their end.
 
 ---
@@ -32,7 +30,6 @@ This requires the use of browser script manager. I recommend Violentmonkey, but 
 **If you would like to contribute, I'm currently hoping to add these features:**
 * \begin{displaymath} ... \end{displaymath} (currently disabled due to causing instability)
 * \begin{equation} ... \end{equation} (currently disabled due to causing instability)
-* Automatic load event listener triggering
 * Tables
 * Packages
 * TikZ
