@@ -41,6 +41,7 @@ Once you have a browser script manager extension installed on your browser:
 
 **If you would like to contribute, I'm currently hoping to make these additions & fixes (but am open to suggestions):**
 * Highlighting bug - [With this userscript running, users can click/drag to highlight text in an email to copy, but the highlight disappears upon release.]
+* Remove blank spaces after opening delimiter - [This bug results in renders being shifted to the right. These blank spaces should be treated as formatting, not as part of the code]
 * Packages - [Introducing LaTeX packages that allow for special formatting and characters beyond what is already available.]
   * TikZ - [A specific package meant for drawing diagrams - probably more challenging to implement than most]
 ---
