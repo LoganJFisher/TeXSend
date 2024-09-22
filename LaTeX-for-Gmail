@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        LaTeX for Gmail
+// @name        LaTeX for Gmail //test
 // @namespace   Violentmonkey Scripts
 // @match       https://mail.google.com/mail/*
 // @grant       GM_registerMenuCommand
