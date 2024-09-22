@@ -16,7 +16,7 @@ This requires the use of browser script manager. I recommend Violentmonkey, but 
 Once you have a browser script manager extension installed on your browser:
 * Click [this link](https://github.com/LoganJFisher/LaTeX-for-Gmail/blob/main/LaTeX-for-Gmail.user.js).
 * Click "Raw" in the upper-right corner of the code window. This will open a new tab.
-* On the new tab, click "Install" (on the left for Violentmonkey)
+* On the new tab, click "Install" (on the left for Violentmonkey).
 * Congratulations - you have successfully installed this userscript. Refresh any open Gmail tabs to use it.
 
 ---
