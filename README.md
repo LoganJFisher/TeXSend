@@ -41,7 +41,7 @@ Once you have a browser script manager extension installed on your browser:
 
 **If you would like to contribute, these fixes & additions are the current priorities (but suggestions are welcome):**
 * Bugs:
-  * Remove blank spaces after opening delimiter - [This bug results in renders being shifted to the right. These blank spaces should be treated as formatting, not as part of the code. Matrices are a special case to be mindful of.]
+  * None known at this time! 😊
 * Features:
   * Packages - [Introducing LaTeX packages that allow for special formatting and characters beyond what is already available.]
     * TikZ - [A specific package meant for drawing diagrams - probably more challenging to implement than most]
