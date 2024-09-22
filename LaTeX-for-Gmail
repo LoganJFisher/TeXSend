@@ -63,7 +63,7 @@ function waitForElement(queryString) {
             if(waitElement) {
                 clearInterval(findInterval);
                 resolve(waitElement);
-            } else if(count > 20) {
+            } else if(count > 100) {
                 clearInterval(findInterval);
                 reject(`Couldn't find waitElement: ${queryString}.`);
             } else {
@@ -73,14 +73,15 @@ function waitForElement(queryString) {
     });
 }
 
-window.addEventListener('load', () => {
-    waitForElement("div#\\:3").then(messagesDiv => {
-        GM_registerMenuCommand('Toggle LaTeX', toggleLatex);
-        messagesDiv.addEventListener('click', refreshLatex);
-        const target = document.querySelector('div#\\:4');
-        const observer = new MutationObserver( () => { refreshLatex(); addButton() });
-        observer.observe(target, {attributes: false, childList: true, subtree: false});
-    });
+
+waitForElement("div#\\:3").then(messagesDiv => {
+    GM_registerMenuCommand('Toggle LaTeX', toggleLatex);
+    messagesDiv.addEventListener('click', refreshLatex);
+});
+
+waitForElement("div#\\:4").then(topbar => {
+    const observer = new MutationObserver( () => { refreshLatex(); addButton() });
+    observer.observe(topbar, {attributes: false, childList: true, subtree: false});
 });
 
 
