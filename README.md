@@ -41,8 +41,9 @@ Once you have a browser script manager extension installed on your browser:
  
  ---
 
-**If you would like to contribute, I'm currently hoping to add these features:**
+**If you would like to contribute, I'm currently hoping to make these additions & fixes:**
 * Improve compatibility with long math arguments
+* Highlighting bug
 * Packages
 * TikZ
 ---
