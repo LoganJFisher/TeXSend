@@ -33,7 +33,7 @@ Once you have a browser script manager extension installed on your browser:
   * \( ... \)
   * \begin{math} ... \end{math}
 * Display mode:
-  * [(; ... ;)]
+ * [(; ... ;)]
   * $$ ... $$ 
   * \[ ... \]
   * \begin{displaymath} ... \end{displaymath}
@@ -42,9 +42,9 @@ Once you have a browser script manager extension installed on your browser:
  ---
 
 **If you would like to contribute, I'm currently hoping to make these additions & fixes:**
-* Highlighting bug
-* Packages
-* TikZ
+* Highlighting bug - [With this userscript running, users can click/drag to highlight text in an email to copy, but the highlight disappears upon release.]
+* Packages - [Introducing LaTeX packages that allow for special formatting and characters beyond what is already available.]
+ * TikZ - [A specific package meant for drawing diagrams - probably more challenging to implement than most]
 ---
 
 I would like to extend thanks to the [KaTeX organization](https://katex.org/) - without which, this would not be possible.
