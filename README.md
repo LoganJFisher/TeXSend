@@ -28,8 +28,8 @@ This requires the use of browser script manager. I recommend Violentmonkey, but 
  ---
 
 **If you would like to contribute, I'm currently hoping to add these features:**
-* \begin{displaymath} ... \end{displaymath} (currently disabled due to causing instability)
-* \begin{equation} ... \end{equation} (currently disabled due to causing instability)
+* \begin{displaymath} ... \end{displaymath} (currently works on some systems, but not others - unclear why)
+* \begin{equation} ... \end{equation} (currently works on some systems, but not others - unclear why)
 * Packages
 * TikZ
 
