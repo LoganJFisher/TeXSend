@@ -29,7 +29,7 @@ Once you have a browser script manager extension installed on your browser:
   * \( ... \)
   * \begin{math} ... \end{math}
 * Display mode:
- * [(; ... ;)]
+  * [(; ... ;)]
   * $$ ... $$ 
   * \[ ... \]
   * \begin{displaymath} ... \end{displaymath}
