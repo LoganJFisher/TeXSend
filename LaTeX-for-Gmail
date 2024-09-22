@@ -26,7 +26,7 @@ function buildRegex(delims) {
     const start = delims.map( d => escape(d.split('...')[0].trim()) );
     const end = delims.map( d => escape(d.split('...')[1].trim()) );
 
-    return new RegExp(`(${start.join('|')})(.+?)(${end.join('|')})`, 'g');
+    return new RegExp(`(${start.join('|')})(.+?)(${end.join('|')})`, 'gs');
 }
 
 
