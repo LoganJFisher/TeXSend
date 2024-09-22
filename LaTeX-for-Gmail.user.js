@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         4.3.2
+// @version         4.3.3
 // @description     Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -41,6 +41,7 @@ function renderLatex(html) {
     ];
 
     html = html.replaceAll('<wbr>', ''); // fixes parsing of long expressions (GMAIL inserts <wbr> tags for some reason)
+    html = html.replaceAll('&nbsp;', ''); // removes white spaces after delimiters
     const div = document.createElement('div');
     katexReplaceList.forEach( ([regex, display]) => {
         html = html.replace(regex, (m, p1, p2) => {
