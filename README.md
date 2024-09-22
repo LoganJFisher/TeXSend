@@ -35,7 +35,7 @@ Once you have a browser script manager extension installed on your browser:
   * \begin{displaymath} ... \end{displaymath}
   * \begin{equation} ... \end{equation}
  
- ![Example of LaTeX for Gmail in action](https://i.imgur.com/AjC4yCv.png)
+ ![Example of LaTeX for Gmail in action](https://i.imgur.com/DSrchz7.png)
  
  ---
 
