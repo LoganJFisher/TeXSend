@@ -23,9 +23,9 @@ function renderLatex(html) {
         [/\\\((.+?)\\\)/g, false],
         [/\${2}(.+?)\${2}/g, true],
         [/\$(.+?)\$/g, false],
-        [/\\begin\{math}(.+?)\\end\{math}/g, false]//, //The following two delimiters introduce a weird instability on some systems (namely, Logan's). They've been removed since they probably wouldn't be all that useful anyway.
-        //[/\\begin\{equation}(.+?)\\end\{equation}/g, true],
-        //[/\\begin\{displaymath}(.+?)\\end\{displaymath}/g, true]
+        [/\\begin\{math}(.+?)\\end\{math}/g, false],
+        [/\\begin\{equation}(.+?)\\end\{equation}/g, true], //This and the next delimiter may not work on all computers. It's unclear why that is.
+        [/\\begin\{displaymath}(.+?)\\end\{displaymath}/g, true]
     ];
 
     const div = document.createElement('div');
