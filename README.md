@@ -2,7 +2,7 @@
 
 Standard equation elements, matrices, and arrays are all fully supported.
 
-It should be noted that the render is only on your end. The recipient of an email will also need to be running this userscript in order to render on their end.
+It should be noted that this does not change the actual content of the email in any way. As such, the render is only on your end. The recipient of an email will also need to be running this userscript in order to render on their end.
 
 ---
 ### Installation Guide:
