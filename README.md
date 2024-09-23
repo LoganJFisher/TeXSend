@@ -43,8 +43,8 @@ All LaTeX code must be placed inside of delimiters. This also applies to matrice
 
 **If you would like to contribute, these fixes & additions are the current priorities (but suggestions are welcome):**
 * Bugs:
-  * $ needs to be escaped by backslash inside of math environments
-    * e.g. \\[\\$100\\] currently renders as "100\100" (for some reason) instead of as "$100"
+  * When $ is escaped by a \ to avoid creating a math environment, the \ should disappear.
+    * e.g. "\\$100 and \\$200" doesn't render (nor should it), but the \ in front of each $ should disappear.
   * Mismatched matrix delimiters
     * e.g. \begin{pmatrix} ... \end{bmatrix} does not work. This is probably actually a KaTeX bug.
 * Features:
