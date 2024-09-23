@@ -22,9 +22,9 @@ Once you have a browser script manager extension installed on your browser:
 ---
 ### Use Guide:
 
-All LaTeX code must be placed inside of delimiters. This also applies to matrices and arrays.
+All LaTeX code must be placed inside of math delimiters. This also applies to matrices and arrays.
 
-**Accepted delimiters include:**
+**Accepted math delimiters include:**
 * Inline mode:
   * [; ... ;]
   * $ ... $
