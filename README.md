@@ -22,6 +22,8 @@ Once you have a browser script manager extension installed on your browser:
 ---
 ### Use Guide:
 
+This userscript currently only provides a button when Gmail is in "no split" mode.
+
 All LaTeX code must be placed inside of math delimiters. This also applies to matrices and arrays.
 
 **Accepted math delimiters include:**
@@ -49,6 +51,7 @@ All LaTeX code must be placed inside of math delimiters. This also applies to ma
     * e.g. \begin{pmatrix} ... \end{bmatrix} does not work. This is probably actually a KaTeX bug.
 * Features:
   * Support for email drafting
+  * Support for Gmail vertical split and horizontal split modes
   * Incorporate [LaTeX.js](https://latex.js.org/)
     * This has been toyed with, but only partial support with lots of issues was achieved.
       * It seems the ideal would be to still use KaTeX for math environments due to superior handling there, but LaTeX.js for everything else.
