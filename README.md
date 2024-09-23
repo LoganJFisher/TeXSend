@@ -52,6 +52,9 @@ All LaTeX code must be placed inside of delimiters. This also applies to matrice
   * Packages - Introducing LaTeX packages that allow for special formatting and characters beyond what is already available.
     * TikZ
       * A specific package meant for drawing diagrams - probably rather challenging to implement
+  * Replace KaTeX with [LaTeX.js](https://latex.js.org/)
+    * This has been toyed with, but only partial support inferior to what KaTeX is able to provide was achieved.
+    * If full support is possible, it would be a major upgrade to the functionality offered by this userscript.
 ---
 
 Special thanks to the [KaTeX organization](https://katex.org/) - without which, this would not be possible.
