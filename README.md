@@ -49,12 +49,11 @@ All LaTeX code must be placed inside of math delimiters. This also applies to ma
     * e.g. \begin{pmatrix} ... \end{bmatrix} does not work. This is probably actually a KaTeX bug.
 * Features:
   * Support for email drafting
-  * Packages - Introducing LaTeX packages that allow for special formatting and characters beyond what is already available.
-    * TikZ
-      * A specific package meant for drawing diagrams - probably rather challenging to implement
   * Incorporate [LaTeX.js](https://latex.js.org/)
     * This has been toyed with, but only partial support with lots of issues was achieved.
-    * It seems the ideal would be to still use KaTeX for math environments due to superior handling there, but LaTeX.js for everything else.
+      * It seems the ideal would be to still use KaTeX for math environments due to superior handling there, but LaTeX.js for everything else.
+    * Packages - Introducing LaTeX packages that allow for special formatting and characters beyond what is already available.
+      * Particularly, TikZ would be pretty neat
 ---
 
 Special thanks to the [KaTeX organization](https://katex.org/) - without which, this would not be possible.
