@@ -48,7 +48,7 @@ Once you have a browser script manager extension installed on your browser:
 * Features:
   * Packages - Introducing LaTeX packages that allow for special formatting and characters beyond what is already available.
     * TikZ
-      * A specific package meant for drawing diagrams - probably more challenging to implement than most
+      * A specific package meant for drawing diagrams - probably rather challenging to implement
 ---
 
 Special thanks to the [KaTeX organization](https://katex.org/) - without which, this would not be possible.
