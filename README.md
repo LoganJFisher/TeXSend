@@ -52,9 +52,9 @@ All LaTeX code must be placed inside of math delimiters. This also applies to ma
   * Packages - Introducing LaTeX packages that allow for special formatting and characters beyond what is already available.
     * TikZ
       * A specific package meant for drawing diagrams - probably rather challenging to implement
-  * Replace KaTeX with [LaTeX.js](https://latex.js.org/)
-    * This has been toyed with, but only partial support inferior to what KaTeX is able to provide was achieved.
-    * If full support is possible, it would be a major upgrade to the functionality offered by this userscript.
+  * Incorporate [LaTeX.js](https://latex.js.org/)
+    * This has been toyed with, but only partial support with lots of issues was achieved.
+    * It seems the ideal would be to still use KaTeX for math environments due to superior handling there, but LaTeX.js for everything else.
 ---
 
 Special thanks to the [KaTeX organization](https://katex.org/) - without which, this would not be possible.
