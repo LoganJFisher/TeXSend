@@ -2,7 +2,7 @@
 
 Standard equation elements, matrices, and arrays are all supported. All must be inside of the below-listed "accepted delimiters" to function.
 
-It should be noted that this does not change the actual content of the email in any way. As such, the render is only on your end. The recipient of an email will also need to be running this userscript in order to render on their end.
+It should be noted that this does not change the actual content of the email in any way. As such, the render is only on your end. The recipient of an email will also need to be running this userscript in order to render on their end. Also, there is currently only support for emails that have actually been sent or received - not simply drafted.
 
 ---
 ### Installation Guide:
@@ -48,6 +48,7 @@ All LaTeX code must be placed inside of delimiters. This also applies to matrice
   * Mismatched matrix delimiters
     * e.g. \begin{pmatrix} ... \end{bmatrix} does not work. This is probably actually a KaTeX bug.
 * Features:
+  * Support for email drafting
   * Packages - Introducing LaTeX packages that allow for special formatting and characters beyond what is already available.
     * TikZ
       * A specific package meant for drawing diagrams - probably rather challenging to implement
