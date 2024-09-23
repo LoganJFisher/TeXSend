@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         4.3.4
+// @version         4.3.5
 // @description     Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -27,10 +27,12 @@ const INLINE_REGEX = buildRegex(INLINE_DELIMS);
 
 function buildRegex(delims) {
     const escape = string => string.replace(/[${}()[\]\\]/g, '\\$&');
-    const start = delims.map( d => escape(d.split('...')[0].trim()) );
-    const end = delims.map( d => escape(d.split('...')[1].trim()) );
+    const exp = delims.map( d => {
+        const [start, end] = d.split('...');
+        return `${escape(start.trim())}(?<tex>.+?)${escape(end.trim())}`;
+    })
 
-    return new RegExp(`(${start.join('|')})(.+?)(${end.join('|')})`, 'gs');
+    return new RegExp(exp.join('|'), 'gs');
 }
 
 
@@ -43,8 +45,8 @@ function renderLatex(html) {
     html = html.replace(/<wbr>|&nbsp;/gs, ''); // fixes parsing of long expressions (GMAIL inserts <wbr> tags for some reason) & removes white spaces after delimiters
     const div = document.createElement('div');
     katexReplaceList.forEach( ([regex, display]) => {
-        html = html.replace(regex, (m, p1, p2) => {
-            div.innerHTML = p2;
+        html = html.replace(regex, function() {
+            div.innerHTML = arguments[arguments.length - 1].tex;
             return katex.renderToString(div.textContent, {throwOnError: false, output: "mathml", displayMode: display})
         });
     });
