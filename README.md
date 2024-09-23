@@ -22,7 +22,7 @@ Once you have a browser script manager extension installed on your browser:
 ---
 ### Use Guide:
 
-This userscript currently only provides a button when Gmail is in "no split" mode.
+This userscript currently only works when Gmail is in "no split" mode.
 
 All LaTeX code must be placed inside of math delimiters. This also applies to matrices and arrays.
 
