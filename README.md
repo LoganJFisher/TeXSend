@@ -22,6 +22,8 @@ Once you have a browser script manager extension installed on your browser:
 ---
 ### Use Guide:
 
+All LaTeX code must be placed inside of delimiters. Even matrices and arrays, which don't need these delimiters in typical compilers.
+
 **Accepted delimiters include:**
 * Inline mode:
   * [; ... ;]
