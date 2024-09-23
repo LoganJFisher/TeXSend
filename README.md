@@ -22,7 +22,7 @@ Once you have a browser script manager extension installed on your browser:
 ---
 ### Use Guide:
 
-All LaTeX code must be placed inside of delimiters. See example below.
+All LaTeX code must be placed inside of delimiters. See examples below.
 
 **Accepted delimiters include:**
 * Inline mode:
