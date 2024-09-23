@@ -1,6 +1,6 @@
 ## This userscript adds a "TeX" button to the action bar at the top of an open email on https://mail.google.com. When clicked, this causes TeX code within a list of accepted delimiters to toggle between rendered and plaintext states.
 
-Standard equation elements, matrices, and arrays are all fully supported.
+Standard equation elements, matrices, and arrays are all supported. All must be placed inside of the below-listed "accepted delimiters" to function.
 
 It should be noted that this does not change the actual content of the email in any way. As such, the render is only on your end. The recipient of an email will also need to be running this userscript in order to render on their end.
 
