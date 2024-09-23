@@ -43,8 +43,8 @@ Once you have a browser script manager extension installed on your browser:
 * Bugs:
   * $ needs to be escaped by backslash inside of math environments
     * e.g. \\[\\$100\\] currently renders as "100\100" (for some reason) instead of as "$100"
-  * Mismatched delimiters
-    * e.g. [; ... \\) is currently allowed. Similarly, mismatched delimiters of inline and display results in a complete failure
+  * Mismatched matrix delimiters
+    * e.g. \begin{pmatrix} ... \end{bmatrix} does not work. This is probably actually a KaTeX bug.
 * Features:
   * Packages - Introducing LaTeX packages that allow for special formatting and characters beyond what is already available.
     * TikZ
