@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         4.3.5
+// @version         4.3.6
 // @description     Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -29,7 +29,7 @@ function buildRegex(delims) {
     const escape = string => string.replace(/[${}()[\]\\]/g, '\\$&');
     const exp = delims.map( d => {
         const [start, end] = d.split('...');
-        return `${escape(start.trim())}(?<tex>.+?)${escape(end.trim())}`;
+        return String.raw`(?<!\\)${escape(start.trim())}(?<tex>.+?)(?<!\\)${escape(end.trim())}`;
     })
 
     return new RegExp(exp.join('|'), 'gs');
