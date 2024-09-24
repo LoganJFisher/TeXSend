@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         4.4.1
+// @version         5.0.0
 // @description     Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -29,12 +29,42 @@ const selectors = {
 const DELIMITERS = [
     {left: '[(;' , right: ';)]' , display: true, includeDelimiter: false},
     {left: '\\[' , right: '\\]' , display: true, includeDelimiter: false},
-    {left: '\\begin{displaymath}' , right: '\\end{displaymath}' , display: true, includeDelimiter: false},
-    {left: '\\begin{equation}' , right: '\\end{equation}', display: true, includeDelimiter: true},
-
     {left: '[;' , right: ';]' , display: false, includeDelimiter: false},
     {left: '\\(' , right: '\\)' , display: false, includeDelimiter: false},
+    {left: '\\begin{displaymath}' , right: '\\end{displaymath}' , display: true, includeDelimiter: false},
     {left: '\\begin{math}' , right: '\\end{math}', display: false, includeDelimiter: false},
+
+    {left: '\\begin{align}' , right: '\\end{align}', display: true, includeDelimiter: true},
+    {left: '\\begin{align*}' , right: '\\end{align*}', display: true, includeDelimiter: true},
+    {left: '\\begin{aligned}' , right: '\\end{aligned}', display: true, includeDelimiter: true},
+    {left: '\\begin{alignat}' , right: '\\end{alignat}', display: true, includeDelimiter: true},
+    {left: '\\begin{alignat*}' , right: '\\end{alignat*}', display: true, includeDelimiter: true},
+    {left: '\\begin{alignedat}' , right: '\\end{alignedat}', display: true, includeDelimiter: true},
+    {left: '\\begin{array}' , right: '\\end{array}', display: true, includeDelimiter: true},
+    {left: '\\begin{bmatrix}' , right: '\\end{bmatrix}', display: true, includeDelimiter: true},
+    {left: '\\begin{bmatrix*}' , right: '\\end{bmatrix*}', display: true, includeDelimiter: true},
+    {left: '\\begin{Bmatrix}' , right: '\\end{Bmatrix}', display: true, includeDelimiter: true},
+    {left: '\\begin{Bmatrix*}' , right: '\\end{Bmatrix*}', display: true, includeDelimiter: true},
+    {left: '\\begin{cases}' , right: '\\end{cases}', display: true, includeDelimiter: true},
+    {left: '\\begin{CD}' , right: '\\end{CD}', display: true, includeDelimiter: true},
+    {left: '\\begin{darray}' , right: '\\end{darray}', display: true, includeDelimiter: true},
+    {left: '\\begin{drcases}' , right: '\\end{drcases}', display: true, includeDelimiter: true},
+    {left: '\\begin{equation}' , right: '\\end{equation}', display: true, includeDelimiter: true},
+    {left: '\\begin{equation*}' , right: '\\end{equation*}', display: true, includeDelimiter: true},
+    {left: '\\begin{gather}' , right: '\\end{gather}', display: true, includeDelimiter: true},
+    {left: '\\begin{gathered}' , right: '\\end{gathered}', display: true, includeDelimiter: true},
+    {left: '\\begin{matrix}' , right: '\\end{matrix}', display: true, includeDelimiter: true},
+    {left: '\\begin{matrix*}' , right: '\\end{matrix*}', display: true, includeDelimiter: true},
+    {left: '\\begin{pmatrix}' , right: '\\end{pmatrix}', display: true, includeDelimiter: true},
+    {left: '\\begin{pmatrix*}' , right: '\\end{pmatrix*}', display: true, includeDelimiter: true},
+    {left: '\\begin{rcases}' , right: '\\end{rcases}', display: true, includeDelimiter: true},
+    {left: '\\begin{smallmatrix}' , right: '\\end{smallmatrix}', display: false, includeDelimiter: true},  //Take note that display is false on this one
+    {left: '\\begin{split}' , right: '\\end{split}', display: true, includeDelimiter: true},
+    {left: '\\begin{subarray}' , right: '\\end{subarray}', display: true, includeDelimiter: true},
+    {left: '\\begin{Vmatrix}' , right: '\\end{Vmatrix}', display: true, includeDelimiter: true},
+    {left: '\\begin{Vmatrix*}' , right: '\\end{Vmatrix*}', display: true, includeDelimiter: true},
+    {left: '\\begin{vmatrix}' , right: '\\end{vmatrix}', display: true, includeDelimiter: true},
+    {left: '\\begin{vmatrix*}' , right: '\\end{vmatrix*}', display: true, includeDelimiter: true},
 ]
 
 const REGEX = buildRegex(DELIMITERS);
