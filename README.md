@@ -26,7 +26,7 @@ This userscript currently only works when Gmail is in "no split" mode (default).
 
 This userscript currently only works for emails that have been sent or received, not simply drafted.
 
-[KaTeX-supported environments](https://katex.org/docs/support_table) (i.e. anything that starts "\begin") (e.g. \begin{bmatrix} and \begin{array}) can be called at any place in an email. In addition to these, a set of additional delimiters have been added to allow you to create inline and display math environments with ease.
+[KaTeX-supported environments](https://katex.org/docs/support_table) (i.e. anything on their list which starts with "\begin") (e.g. \begin{bmatrix} and \begin{array}) can be called at any place in an email. In addition to these, a set of additional delimiters have been added to allow you to create inline and display math environments with ease.
 
 **Accepted math environment delimiters include:**
 * Inline mode:
