@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         4.3.6
+// @version         4.4.0
 // @description     Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -19,8 +19,15 @@
 
 let LATEX_TOGGLE_STATE = true;
 
-const DISPLAY_DELIMS = ['[(; ... ;)]', '$$ ... $$', '\\[ ... \\]', '\\begin{equation} ... \\end{equation}', '\\begin{displaymath} ... \\end{displaymath}'];
-const INLINE_DELIMS = ['[; ... ;]', '$ ... $', '\\( ... \\)', '\\begin{math} ... \\end{math}'];
+const selectors = {
+    topBar: 'div#\\:4',
+    moveButton: 'div#\\:4 div[title="Move to"]',
+    messageList: '#\\:1 div[role=list]',
+    messageBody: '#\\:1 [role=list] > [role=listitem][aria-expanded=true] [data-message-id] > div > div > div[id^=":"][jslog]',
+}
+
+const DISPLAY_DELIMS = ['[(; ... ;)]', '\\[ ... \\]', '\\begin{equation} ... \\end{equation}', '\\begin{displaymath} ... \\end{displaymath}'];
+const INLINE_DELIMS = ['[; ... ;]', '\\( ... \\)', '\\begin{math} ... \\end{math}'];
 
 const DISPLAY_REGEX = buildRegex(DISPLAY_DELIMS);
 const INLINE_REGEX = buildRegex(INLINE_DELIMS);
@@ -35,7 +42,6 @@ function buildRegex(delims) {
     return new RegExp(exp.join('|'), 'gs');
 }
 
-
 function renderLatex(html) {
     const katexReplaceList = [
         [DISPLAY_REGEX, true],
@@ -47,7 +53,7 @@ function renderLatex(html) {
     katexReplaceList.forEach( ([regex, display]) => {
         html = html.replace(regex, function() {
             div.innerHTML = arguments[arguments.length - 1].tex;
-            return katex.renderToString(div.textContent, {throwOnError: false, output: "mathml", displayMode: display})
+            return katex.renderToString(div.textContent, {throwOnError: false, displayMode: display})
         });
     });
 
@@ -55,13 +61,12 @@ function renderLatex(html) {
 }
 
 function refreshLatex(){
-    const messages = document.querySelectorAll("#\\:1 [role=list] > [role=listitem][aria-expanded=true]");
+    const messages = document.querySelectorAll(selectors.messageBody);
     messages.forEach(message => {
-        let subportion = message.querySelector("[data-message-id] > div > div > div[id^=':'][jslog]");
-        message = subportion || message;
         message.oldHTML = message.oldHTML || message.innerHTML;
+        message.cachedLatex = message.cachedLatex || renderLatex(message.innerHTML);
 
-        message.innerHTML = LATEX_TOGGLE_STATE ? renderLatex(message.innerHTML) : message.oldHTML;
+        message.innerHTML = LATEX_TOGGLE_STATE ? message.cachedLatex : message.oldHTML;
     });
 }
 
@@ -88,9 +93,8 @@ function waitForElement(queryString) {
     });
 }
 
-
 function observeMessages() {
-    const messageList = document.querySelector("#\\:1 div[role=list]");
+    const messageList = document.querySelector(selectors.messageList);
     if (!messageList) return;
 
     const messages = messageList.querySelectorAll('div[role=listitem]');
@@ -98,26 +102,14 @@ function observeMessages() {
     messages.forEach( msg => observer.observe(msg, {attributes: true, attributeFilter: ["aria-expanded"]}) );
 }
 
-
-waitForElement("div#\\:4").then(topbar => {
-    GM_registerMenuCommand('Toggle LaTeX', toggleLatex);
-    const observer = new MutationObserver( () => {
-        refreshLatex();
-        addButton();
-        observeMessages();
-    });
-    observer.observe(topbar, {attributes: false, childList: true, subtree: false});
-});
-
-
 function addButton() {
-    const moveBtn = document.querySelector('div#\\:4 div[title="Move to"]');
+    const moveBtn = document.querySelector(selectors.moveButton);
     if (!moveBtn) return;
 
     GM_addElement(moveBtn.parentElement, 'div', {
         id: 'LatexButton',
         role: 'button',
-        style: 'cursor: pointer; margin: 0 12px 0 12px; color: var(--gm3-sys-color-on-surface)',
+        style: 'cursor: pointer; margin: 0 12px 0 12px; color: var(--gm3-sys-color-on-surface);',
         'aria-label': 'Toggle LaTeX',
         'data-tooltip': 'Toggle LaTeX',
         textContent: 'TeX'
@@ -125,15 +117,31 @@ function addButton() {
 
     const latexButton = document.querySelector('#LatexButton');
     latexButton.addEventListener('click', toggleLatex);
+    //latexButton.innerHTML = katex.renderToString('\\footnotesize \\TeX', {throwOnError: false});
 }
 
-if (window.trustedTypes && window.trustedTypes.createPolicy && !window.trustedTypes.defaultPolicy) {
-    window.trustedTypes.createPolicy('default', {
-        createHTML: string => string
+
+function main() {
+    if (window.trustedTypes && window.trustedTypes.createPolicy && !window.trustedTypes.defaultPolicy) {
+        window.trustedTypes.createPolicy('default', {
+            createHTML: string => string
+        });
+    }
+
+    GM_addElement('link', {
+        rel: "stylesheet",
+        href: "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.css"
+    });
+
+    waitForElement(selectors.topBar).then(topbar => {
+        GM_registerMenuCommand('Toggle LaTeX', toggleLatex);
+        const observer = new MutationObserver( () => {
+            addButton();
+            refreshLatex();
+            observeMessages();
+        });
+        observer.observe(topbar, {attributes: false, childList: true, subtree: false});
     });
 }
 
-GM_addElement('link', {
-    rel: "stylesheet",
-    src: "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.css"
-});
+main();
