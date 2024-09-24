@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         5.0.0
+// @version         5.0.1
 // @description     Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -143,7 +143,7 @@ function addButton() {
     GM_addElement(moveBtn.parentElement, 'div', {
         id: 'LatexButton',
         role: 'button',
-        style: 'cursor: pointer; margin: 0 12px 0 12px; color: var(--gm3-sys-color-on-surface);',
+        style: 'cursor: pointer; margin: -4px 12px 0 12px; color: var(--gm3-sys-color-on-surface);',
         'aria-label': 'Toggle LaTeX',
         'data-tooltip': 'Toggle LaTeX',
         textContent: 'TeX'
@@ -151,7 +151,7 @@ function addButton() {
 
     const latexButton = document.querySelector('#LatexButton');
     latexButton.addEventListener('click', toggleLatex);
-    //latexButton.innerHTML = katex.renderToString('\\footnotesize \\TeX', {throwOnError: false});
+    latexButton.innerHTML = katex.renderToString('\\footnotesize \\TeX', {throwOnError: false});
 }
 
 
