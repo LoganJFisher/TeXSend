@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         4.4.0
+// @version         5.0.0
 // @description     Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -26,36 +26,70 @@ const selectors = {
     messageBody: '#\\:1 [role=list] > [role=listitem][aria-expanded=true] [data-message-id] > div > div > div[id^=":"][jslog]',
 }
 
-const DISPLAY_DELIMS = ['[(; ... ;)]', '\\[ ... \\]', '\\begin{equation} ... \\end{equation}', '\\begin{displaymath} ... \\end{displaymath}'];
-const INLINE_DELIMS = ['[; ... ;]', '\\( ... \\)', '\\begin{math} ... \\end{math}'];
+const DELIMITERS = [
+    {left: '[(;' , right: ';)]' , display: true, includeDelimiter: false},
+    {left: '\\[' , right: '\\]' , display: true, includeDelimiter: false},
+    {left: '[;' , right: ';]' , display: false, includeDelimiter: false},
+    {left: '\\(' , right: '\\)' , display: false, includeDelimiter: false},
+    {left: '\\begin{displaymath}' , right: '\\end{displaymath}' , display: true, includeDelimiter: false},
+    {left: '\\begin{math}' , right: '\\end{math}', display: false, includeDelimiter: false},
 
-const DISPLAY_REGEX = buildRegex(DISPLAY_DELIMS);
-const INLINE_REGEX = buildRegex(INLINE_DELIMS);
+    {left: '\\begin{align}' , right: '\\end{align}', display: true, includeDelimiter: true},
+    {left: '\\begin{align*}' , right: '\\end{align*}', display: true, includeDelimiter: true},
+    {left: '\\begin{aligned}' , right: '\\end{aligned}', display: true, includeDelimiter: true},
+    {left: '\\begin{alignat}' , right: '\\end{alignat}', display: true, includeDelimiter: true},
+    {left: '\\begin{alignat*}' , right: '\\end{alignat*}', display: true, includeDelimiter: true},
+    {left: '\\begin{alignedat}' , right: '\\end{alignedat}', display: true, includeDelimiter: true},
+    {left: '\\begin{array}' , right: '\\end{array}', display: true, includeDelimiter: true},
+    {left: '\\begin{bmatrix}' , right: '\\end{bmatrix}', display: true, includeDelimiter: true},
+    {left: '\\begin{bmatrix*}' , right: '\\end{bmatrix*}', display: true, includeDelimiter: true},
+    {left: '\\begin{Bmatrix}' , right: '\\end{Bmatrix}', display: true, includeDelimiter: true},
+    {left: '\\begin{Bmatrix*}' , right: '\\end{Bmatrix*}', display: true, includeDelimiter: true},
+    {left: '\\begin{cases}' , right: '\\end{cases}', display: true, includeDelimiter: true},
+    {left: '\\begin{CD}' , right: '\\end{CD}', display: true, includeDelimiter: true},
+    {left: '\\begin{darray}' , right: '\\end{darray}', display: true, includeDelimiter: true},
+    {left: '\\begin{drcases}' , right: '\\end{drcases}', display: true, includeDelimiter: true},
+    {left: '\\begin{equation}' , right: '\\end{equation}', display: true, includeDelimiter: true},
+    {left: '\\begin{equation*}' , right: '\\end{equation*}', display: true, includeDelimiter: true},
+    {left: '\\begin{gather}' , right: '\\end{gather}', display: true, includeDelimiter: true},
+    {left: '\\begin{gathered}' , right: '\\end{gathered}', display: true, includeDelimiter: true},
+    {left: '\\begin{matrix}' , right: '\\end{matrix}', display: true, includeDelimiter: true},
+    {left: '\\begin{matrix*}' , right: '\\end{matrix*}', display: true, includeDelimiter: true},
+    {left: '\\begin{pmatrix}' , right: '\\end{pmatrix}', display: true, includeDelimiter: true},
+    {left: '\\begin{pmatrix*}' , right: '\\end{pmatrix*}', display: true, includeDelimiter: true},
+    {left: '\\begin{rcases}' , right: '\\end{rcases}', display: true, includeDelimiter: true},
+    {left: '\\begin{smallmatrix}' , right: '\\end{smallmatrix}', display: false, includeDelimiter: true},  //Take note that display is false on this one
+    {left: '\\begin{split}' , right: '\\end{split}', display: true, includeDelimiter: true},
+    {left: '\\begin{subarray}' , right: '\\end{subarray}', display: true, includeDelimiter: true},
+    {left: '\\begin{Vmatrix}' , right: '\\end{Vmatrix}', display: true, includeDelimiter: true},
+    {left: '\\begin{Vmatrix*}' , right: '\\end{Vmatrix*}', display: true, includeDelimiter: true},
+    {left: '\\begin{vmatrix}' , right: '\\end{vmatrix}', display: true, includeDelimiter: true},
+    {left: '\\begin{vmatrix*}' , right: '\\end{vmatrix*}', display: true, includeDelimiter: true},
+]
+
+const REGEX = buildRegex(DELIMITERS);
 
 function buildRegex(delims) {
-    const escape = string => string.replace(/[${}()[\]\\]/g, '\\$&');
-    const exp = delims.map( d => {
-        const [start, end] = d.split('...');
-        return String.raw`(?<!\\)${escape(start.trim())}(?<tex>.+?)(?<!\\)${escape(end.trim())}`;
+    const escape = string => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const expressions = delims.map( d => {
+        const display = d.display ? '(?<d>)' : '';
+        const exp = d.includeDelimiter ? `(?<tex>${escape(d.left)}.+?${escape(d.right)})${display}` : `${escape(d.left)}(?<tex>.+?)${escape(d.right)}${display}`;
+        return exp;
     })
 
-    return new RegExp(exp.join('|'), 'gs');
+    return new RegExp(expressions.join('|'), 'gs');
 }
 
 function renderLatex(html) {
-    const katexReplaceList = [
-        [DISPLAY_REGEX, true],
-        [INLINE_REGEX, false],
-    ];
-
     html = html.replace(/<wbr>|&nbsp;/gs, ''); // fixes parsing of long expressions (GMAIL inserts <wbr> tags for some reason) & removes white spaces after delimiters
     const div = document.createElement('div');
-    katexReplaceList.forEach( ([regex, display]) => {
-        html = html.replace(regex, function() {
-            div.innerHTML = arguments[arguments.length - 1].tex;
-            return katex.renderToString(div.textContent, {throwOnError: false, displayMode: display})
-        });
-    });
+
+    html = html.replace(REGEX, function() {
+        const groups = arguments[arguments.length - 1];
+        const display = groups.d !== undefined;
+        div.innerHTML = groups.tex;
+        return katex.renderToString(div.textContent, {throwOnError: false, displayMode: display})
+    })
 
     return html;
 }
