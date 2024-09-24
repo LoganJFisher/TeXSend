@@ -2,7 +2,7 @@
 
 Everything that is on the [KaTeX Support Table](https://katex.org/docs/support_table) is supported by this userscript. That includes all standard equation elements, matrices, arrays, and lots more.
 
-It should be noted that this does not change the actual content of the email in any way. As such, the render is only on your end. The recipient of an email will also need to be running this userscript in order to compile on their end.
+It should be noted that this does not change the actual content of the email in any way. As such, the compiled LaTeX is only on your end. The recipient of an email will also need to be running this userscript in order to compile on their end.
 
 ---
 ### Installation Guide:
