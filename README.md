@@ -1,8 +1,8 @@
-## This userscript adds a "TeX" button to the action bar at the top of an open email on https://mail.google.com. When clicked, this causes TeX code within a list of accepted delimiters to toggle between rendered and plaintext states.
+## This userscript adds a "TeX" button to the action bar at the top of an open email on https://mail.google.com. When clicked, this causes TeX code to toggle between compiled and plaintext states.
 
-Standard equation elements, matrices, and arrays are all supported. All must be inside of the below-listed "accepted delimiters" to function.
+Everything that is on the [KaTeX Support Table](https://katex.org/docs/support_table) is supported by this userscript. That includes all standard equation elements, matrices, arrays, and lots more.
 
-It should be noted that this does not change the actual content of the email in any way. As such, the render is only on your end. The recipient of an email will also need to be running this userscript in order to render on their end.
+It should be noted that this does not change the actual content of the email in any way. As such, the render is only on your end. The recipient of an email will also need to be running this userscript in order to compile on their end.
 
 ---
 ### Installation Guide:
@@ -27,20 +27,18 @@ This userscript currently only works when Gmail is in "no split" mode (default).
 
 This userscript currently only works for emails that have been sent or received, not simply drafted.
 
-All LaTeX code must be placed inside of math delimiters. This also applies to matrices and arrays.
+[KaTeX-supported environments](https://katex.org/docs/support_table) (i.e. anything that starts "\begin") (e.g. \begin{bmatrix} and \begin{array}) can be called at any place in an email. In addition to these, a set of additional delimiters have been added to allow you to create inline and display math environments with ease.
 
-**Accepted math delimiters include:**
+**Accepted math environment delimiters include:**
 * Inline mode:
-  * [; ... ;] --- TeXTheWorld delimiter
+  * [; ... ;]
   * \\( ... \\)
   * \begin{math} ... \end{math}
 * Display mode:
-  * [(; ... ;)] --- TeXTheWorld delimite
+  * [(; ... ;)]
   * \\[ ... \\]
   * \begin{displaymath} ... \end{displaymath}
-  * \begin{equation} ... \end{equation}
- 
- Note: $ and $$ delimiters were previously accepted, but were removed due to presenting various issues. They're considered poor practice in using LaTeX anyway.
+  * \begin{equation} ... \end{equation} ||| *Numerated*
  
  ![Example of LaTeX for Gmail in action](https://i.imgur.com/OWW4g6k.png)
  
@@ -48,7 +46,7 @@ All LaTeX code must be placed inside of math delimiters. This also applies to ma
 
 **If you would like to contribute, these fixes & additions are the current priorities (but suggestions are welcome):**
 * Bugs:
-  * Equation numeration carries between emails in a chain
+  * Equation numeration carries between emails in a chain, but excludes minimized emails
 * Features:
   * Support for email drafting
   * Support for Gmail vertical split and horizontal split modes
