@@ -2,7 +2,7 @@
 
 Standard equation elements, matrices, and arrays are all supported. All must be inside of the below-listed "accepted delimiters" to function.
 
-It should be noted that this does not change the actual content of the email in any way. As such, the render is only on your end. The recipient of an email will also need to be running this userscript in order to render on their end. Also, there is currently only support for Gmail's "no split" mode, and only works in emails that have actually been sent or received - not simply drafted.
+It should be noted that this does not change the actual content of the email in any way. As such, the render is only on your end. The recipient of an email will also need to be running this userscript in order to render on their end.
 
 ---
 ### Installation Guide:
@@ -22,7 +22,9 @@ Once you have a browser script manager extension installed on your browser:
 ---
 ### Use Guide:
 
-This userscript currently only works when Gmail is in "no split" mode.
+This userscript currently only works when Gmail is in "no split" mode (default).
+
+This userscript currently only works for emails that have been sent or received, not simply drafted.
 
 All LaTeX code must be placed inside of math delimiters. This also applies to matrices and arrays.
 
