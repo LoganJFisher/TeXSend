@@ -39,7 +39,7 @@ This userscript currently only works for emails that have been sent or received,
   * `\begin{displaymath} ... \end{displaymath}`
   * `\begin{equation} ... \end{equation}` — *Numerated*
  
-  Note: Place `\displaystyle` inside of inline delimiters to compile your equation as display mode with line breaks. e.g. `\(\displaystyle E=mc^{2}\)`
+  Note: `\displaystyle` inside of inline delimiters compiles your equation as display mode with line breaks. e.g. `\(\displaystyle E=mc^{2}\)`
  
  ![Example of LaTeX for Gmail in action](https://i.imgur.com/zEIsQeL.png)
  
