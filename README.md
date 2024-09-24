@@ -51,6 +51,7 @@ This userscript currently only works for emails that have been sent or received,
 * Features:
   * Support for email drafting
   * Support for Gmail vertical split and horizontal split modes
+  * Add descriptive comments to the userscript to accomodate code reviews and user edits
   * Incorporate [LaTeX.js](https://latex.js.org/)
     * This has been toyed with, but only partial support with lots of issues was achieved.
       * It seems the ideal would be to still use KaTeX for math environments due to superior handling there, but LaTeX.js for everything else.
