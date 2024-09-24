@@ -40,7 +40,7 @@ This userscript currently only works for emails that have been sent or received,
   * \begin{displaymath} ... \end{displaymath}
   * \begin{equation} ... \end{equation} ||| *Numerated*
  
- ![Example of LaTeX for Gmail in action](https://i.imgur.com/OWW4g6k.png)
+ ![Example of LaTeX for Gmail in action](https://i.imgur.com/L1xCUIL.png)
  
  ---
 
