@@ -11,7 +11,8 @@ This requires the use of browser script manager. Violentmonkey is recommended, b
 * [Chrome](https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag)
 * [Firefox](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/)
 * [Edge](https://microsoftedge.microsoft.com/addons/detail/violentmonkey/eeagobfjdenkkddmbclomhiblgggliao)
-* This userscript should also be compatible with all other browsers, including Safari, Opera, etc.
+* [Opera](https://github.com/OpenUserJs/OpenUserJS.org/wiki/Violentmonkey-for-Opera)
+* [Safari](https://apps.apple.com/us/app/meddlemonkey/id1539631953?mt=12) (MeddleMonkey is a fork of Violentmonkey)
 
 Once you have a browser script manager extension installed on your browser:
 * Click [this link](https://github.com/LoganJFisher/LaTeX-for-Gmail/blob/main/LaTeX-for-Gmail.user.js).
