@@ -38,7 +38,7 @@ This userscript currently only works for emails that have been sent or received,
   * [(; ... ;)]
   * \\[ ... \\]
   * \begin{displaymath} ... \end{displaymath}
-  * \begin{equation} ... \end{equation} ||| *Numerated*
+  * \begin{equation} ... \end{equation} —— *Numerated*
  
  ![Example of LaTeX for Gmail in action](https://i.imgur.com/zEIsQeL.png)
  
