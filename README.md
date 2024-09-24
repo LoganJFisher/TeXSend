@@ -2,7 +2,7 @@
 
 Standard equation elements, matrices, and arrays are all supported. All must be inside of the below-listed "accepted delimiters" to function.
 
-It should be noted that this does not change the actual content of the email in any way. As such, the render is only on your end. The recipient of an email will also need to be running this userscript in order to render on their end. Also, there is currently only support for emails that have actually been sent or received - not simply drafted.
+It should be noted that this does not change the actual content of the email in any way. As such, the render is only on your end. The recipient of an email will also need to be running this userscript in order to render on their end. Also, there is currently only support for Gmail's "no split" mode, and only works in emails that have actually been sent or received - not simply drafted.
 
 ---
 ### Installation Guide:
