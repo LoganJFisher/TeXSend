@@ -47,6 +47,7 @@ This userscript currently only works for emails that have been sent or received,
 **If you would like to contribute, these fixes & additions are the current priorities (but suggestions are welcome):**
 * Bugs:
   * Equation numeration carries between emails in a chain, but excludes minimized emails
+  * We can make the button the actual TeX logo, but it appears a bit lower than it should
 * Features:
   * Support for email drafting
   * Support for Gmail vertical split and horizontal split modes
