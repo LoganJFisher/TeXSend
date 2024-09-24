@@ -48,7 +48,7 @@ All LaTeX code must be placed inside of math delimiters. This also applies to ma
 
 **If you would like to contribute, these fixes & additions are the current priorities (but suggestions are welcome):**
 * Bugs:
-  * \begin{equation} doesn't produce equation numeration
+  * Equation numeration carries between emails in a chain
 * Features:
   * Support for email drafting
   * Support for Gmail vertical split and horizontal split modes
