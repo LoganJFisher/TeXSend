@@ -7,7 +7,7 @@ It should be noted that this does not change the actual content of the email in 
 ---
 ### Installation Guide:
 
-This requires the use of browser script manager. Violentmonkey is recommended, but other options should also be compatible.
+This requires the use of a browser script manager. Violentmonkey is recommended, but other options should also be compatible.
 * [Chrome](https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag)
 * [Firefox](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/)
 * [Edge](https://microsoftedge.microsoft.com/addons/detail/violentmonkey/eeagobfjdenkkddmbclomhiblgggliao)
