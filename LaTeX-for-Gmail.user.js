@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         5.0.1
+// @version         5.1.0
 // @description     Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -12,6 +12,7 @@
 // @noframes
 // @grant           GM_registerMenuCommand
 // @grant           GM_addElement
+// @grant           GM_addStyle
 // @require         https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js
 // ==/UserScript==
 
@@ -140,18 +141,23 @@ function addButton() {
     const moveBtn = document.querySelector(selectors.moveButton);
     if (!moveBtn) return;
 
-    GM_addElement(moveBtn.parentElement, 'div', {
+    const latexButton = GM_addElement(moveBtn.parentElement, 'div', {
         id: 'LatexButton',
         role: 'button',
-        style: 'cursor: pointer; margin: -4px 12px 0 12px; color: var(--gm3-sys-color-on-surface);',
-        'aria-label': 'Toggle LaTeX',
         'data-tooltip': 'Toggle LaTeX',
-        textContent: 'TeX'
+        style: 'cursor: pointer; margin: 0 16px 0 12px; color: var(--gm3-sys-color-on-surface);'
     });
 
-    const latexButton = document.querySelector('#LatexButton');
+    const logoDiv = GM_addElement(latexButton, 'div', {
+        class: 'asa',
+        style: 'width: 20px; height: 20px; display: inline-flex; align-items: end',
+    });
+
+    logoDiv.innerHTML = katex.renderToString('\\footnotesize \\TeX', {throwOnError: false});
+
     latexButton.addEventListener('click', toggleLatex);
-    latexButton.innerHTML = katex.renderToString('\\footnotesize \\TeX', {throwOnError: false});
+    latexButton.addEventListener('mouseover', () => latexButton.classList.add('T-I-JW'));
+    latexButton.addEventListener('mouseout', () => latexButton.classList.remove('T-I-JW'));
 }
 
 
