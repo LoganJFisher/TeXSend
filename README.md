@@ -15,9 +15,9 @@ This requires the use of a browser script manager. Violentmonkey is recommended,
 * [Safari](https://apps.apple.com/us/app/meddlemonkey/id1539631953?mt=12)
 
 Once you have a browser script manager extension installed on your browser:
-* Click [this link](https://github.com/LoganJFisher/LaTeX-for-Gmail/raw/refs/heads/main/LaTeX-for-Gmail.user.js).
-* On the new tab, click "Install" (on the left for Violentmonkey).
-* Congratulations - you have successfully installed this userscript. Refresh any open Gmail tabs to use it.
+* Click [this link](https://github.com/LoganJFisher/LaTeX-for-Gmail/raw/refs/heads/main/LaTeX-for-Gmail.user.js)
+* On the new tab, click "Install" (on the left for Violentmonkey)
+* Refresh any open Gmail tabs to use it
 
 ---
 ### Use Guide:
