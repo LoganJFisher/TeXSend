@@ -28,16 +28,16 @@ All LaTeX code must be placed inside of math delimiters. This also applies to ma
 
 **Accepted math delimiters include:**
 * Inline mode:
-  * [; ... ;]
-  * $ ... $
+  * [; ... ;] --- TeXTheWorld delimiter
   * \\( ... \\)
   * \begin{math} ... \end{math}
 * Display mode:
-  * [(; ... ;)]
-  * $$ ... $$ 
+  * [(; ... ;)] --- TeXTheWorld delimite
   * \\[ ... \\]
   * \begin{displaymath} ... \end{displaymath}
   * \begin{equation} ... \end{equation}
+ 
+ Note: $ and $$ delimiters were previously accepted, but were removed due to presenting various issues. They're considered poor practice in using LaTeX anyway.
  
  ![Example of LaTeX for Gmail in action](https://i.imgur.com/DSrchz7.png)
  
@@ -45,10 +45,7 @@ All LaTeX code must be placed inside of math delimiters. This also applies to ma
 
 **If you would like to contribute, these fixes & additions are the current priorities (but suggestions are welcome):**
 * Bugs:
-  * When $ is escaped by a \ to avoid creating a math environment, the \ should disappear.
-    * e.g. "\\$100 and \\$200" doesn't render (nor should it), but the \ in front of each $ should disappear.
-  * Mismatched matrix delimiters
-    * e.g. \begin{pmatrix} ... \end{bmatrix} does not work. This is probably actually a KaTeX bug.
+  * None known at this time!
 * Features:
   * Support for email drafting
   * Support for Gmail vertical split and horizontal split modes
