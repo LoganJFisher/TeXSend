@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         4.3.7
+// @version         4.4.0
 // @description     Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -26,8 +26,8 @@ const selectors = {
     messageBody: '#\\:1 [role=list] > [role=listitem][aria-expanded=true] [data-message-id] > div > div > div[id^=":"][jslog]',
 }
 
-const DISPLAY_DELIMS = ['[(; ... ;)]', '$$ ... $$', '\\[ ... \\]', '\\begin{equation} ... \\end{equation}', '\\begin{displaymath} ... \\end{displaymath}'];
-const INLINE_DELIMS = ['[; ... ;]', '$ ... $', '\\( ... \\)', '\\begin{math} ... \\end{math}'];
+const DISPLAY_DELIMS = ['[(; ... ;)]', '\\[ ... \\]', '\\begin{equation} ... \\end{equation}', '\\begin{displaymath} ... \\end{displaymath}'];
+const INLINE_DELIMS = ['[; ... ;]', '\\( ... \\)', '\\begin{math} ... \\end{math}'];
 
 const DISPLAY_REGEX = buildRegex(DISPLAY_DELIMS);
 const INLINE_REGEX = buildRegex(INLINE_DELIMS);
@@ -57,7 +57,6 @@ function renderLatex(html) {
         });
     });
 
-    html = html.replace(/\\\$/gs, '\$'); // unescapes escaped characters (outside of delimiters).
     return html;
 }
 
