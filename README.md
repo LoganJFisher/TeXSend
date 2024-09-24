@@ -30,14 +30,16 @@ This userscript currently only works for emails that have been sent or received,
 
 **Accepted math environment delimiters include:**
 * Inline mode:
-  * [; ... ;]
-  * \\( ... \\)
-  * \begin{math} ... \end{math}
+  * `[; ... ;]`
+  * `\\( ... \\)`
+  * `\begin{math} ... \end{math}`
 * Display mode:
-  * [(; ... ;)]
-  * \\[ ... \\]
-  * \begin{displaymath} ... \end{displaymath}
-  * \begin{equation} ... \end{equation} —— *Numerated*
+  * `[(; ... ;)]`
+  * `\\[ ... \\]`
+  * `\begin{displaymath} ... \end{displaymath}`
+  * `\begin{equation} ... \end{equation}` — *Numerated*
+ 
+  Note: `\displaystyle` inside of inline delimiters compiles as display mode with line breaks. e.g. `\(\displaystyle E=mc^{2}\)`
  
  ![Example of LaTeX for Gmail in action](https://i.imgur.com/zEIsQeL.png)
  
