@@ -49,7 +49,8 @@ $~~~~$**Accepted math environment delimiters include:**
   * `\begin{displaymath} ... \end{displaymath}`
   * `\begin{equation} ... \end{equation}` — *Numerated*
 
-:bulb: Use `\displaystyle` inside inline delimiters to compile as display mode with line breaks. Example: `\(\displaystyle E=mc^{2}\)`
+:bulb: Use `\displaystyle` inside inline delimiters to compile as display mode with line breaks. <br>
+$~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
  
 ![Example of LaTeX for Gmail in action](https://i.imgur.com/zEIsQeL.png)
 </details>
