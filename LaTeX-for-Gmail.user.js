@@ -162,12 +162,32 @@ function addButton() {
     latexButton.addEventListener('mouseout', () => latexButton.classList.remove('T-I-JW'));
 }
 
+function waitForElement(queryString, interval=100, maxTries=100) {
+    let count = 0;
+    return new Promise((resolve, reject) => {
+        let findInterval = setInterval(() => {
+            let waitElement = document.querySelector(queryString);
+            if(waitElement) {
+                clearInterval(findInterval);
+                resolve(waitElement);
+            } else if(count > maxTries) {
+                clearInterval(findInterval);
+                reject(`Couldn't find waitElement: ${queryString}.`);
+            } else {
+                count += 1;
+            }
+        }, interval);
+    });
+}
+ 
+// ========================================
+ 
 function addShortcuts() {
     const keyHandler = (e) => {
         if (e.shiftKey && e.code === 'KeyL') {
             toggleLatex()
         } else if (e.shiftKey && e.code === 'Slash') {
-            waitForElement('body > div.wa:not(.aou) > div[role=alert]').then(d => {
+            waitForElement('body > div.wa:not(.aou) > div[role=alert]', 5).then(d => {
                 const xpath = '//tr[th/text()="Formatting"]/following-sibling::tr';
                 const row = document.evaluate(xpath, d, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
                 const html = '<td class="wg Dn"><span class="wh">Shift</span> <span class="wb">+</span> <span class="wh">L</span> :</td><td class="we Dn">Toggle LaTeX</td>';
