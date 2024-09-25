@@ -34,9 +34,11 @@ Once you have a browser script manager extension installed on your browser:
 
 LaTeX code is compiled automatically upon opening an email or expanding an email in a chain. To toggle it off (or back on), click the $\TeX$ button on the action bar at the top of the email.
 
+$~~~~$:accessibility: Shift+L also works as a shortcut to toggle TeX compiling.
+
 [KaTeX-supported environments](https://katex.org/docs/support_table) (i.e. anything on their list which starts with `\begin`) (e.g. `\begin{bmatrix}` and `\begin{array}`) can be called at any place in an email. In addition to these, a set of additional delimiters have been added to allow you to create inline and display math environments with ease.
 
-**Accepted math environment delimiters include:**
+$~~~~$**Accepted math environment delimiters include:**
 * Inline mode:
   * `[; ... ;]` <!-- This is from "TeXTheWorld" and "Mathjax for Reddit" -->
   * `\( ... \)`
@@ -63,10 +65,10 @@ LaTeX code is compiled automatically upon opening an email or expanding an email
 * :gem: Features:
   * Support for email drafting
   * Support for Gmail vertical split and horizontal split modes
-  * :accessibility: "Shift+L" as Gmail shortcut to trigger TeX button (hit Shift+? to see the current list)
   * Add descriptive comments to the userscript to accomodate code reviews and user edits
   * Enable [trust option](https://katex.org/docs/options) to allow use of `\href`, `\includegraphics`, and `\url`
   * Disable [strict option](https://katex.org/docs/options) to allow more flexible LaTeX and use of `\htmlClass`, `\htmlData`, `\htmlId`, and `\htmlStyle` (all also require enabling trust option)
+  * Add "Shift+L" to Gmail's "Shift+?" shortcuts list
   * Incorporate [LaTeX.js](https://latex.js.org/)
     * This has been toyed with, but only partial support with lots of issues was achieved.
       * It seems the ideal would be to still use KaTeX for math environments due to superior handling there, but LaTeX.js for everything else.
