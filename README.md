@@ -8,8 +8,11 @@ The only exceptions require `trust` to be enabled (planned) or `strict` to be di
 
 > [!WARNING]
 > This does not currently support email drafts or split views.
+
+
 ---
-### Installation Guide:
+<details>
+<summary>:wrench: Installation Guide:</summary>
 
 This requires the use of a browser script manager. Violentmonkey is recommended, but other options should also be compatible.
 * [Chrome](https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag)
@@ -22,9 +25,12 @@ Once you have a browser script manager extension installed on your browser:
 * Click [this link](https://github.com/LoganJFisher/LaTeX-for-Gmail/raw/refs/heads/main/LaTeX-for-Gmail.user.js)
 * On the new tab, click "Install" (on the left for Violentmonkey)
 * Refresh any open Gmail tabs
+</details>
+
 
 ---
-### Use Guide:
+<details>
+<summary>:writing_hand: Use Guide:</summary>
 
 [KaTeX-supported environments](https://katex.org/docs/support_table) (i.e. anything on their list which starts with `\begin`) (e.g. `\begin{bmatrix}` and `\begin{array}`) can be called at any place in an email. In addition to these, a set of additional delimiters have been added to allow you to create inline and display math environments with ease.
 
@@ -43,15 +49,20 @@ Once you have a browser script manager extension installed on your browser:
 > Use `\displaystyle` inside inline delimiters to compile as display mode with line breaks. Example: `\(\displaystyle E=mc^{2}\)`
  
  ![Example of LaTeX for Gmail in action](https://i.imgur.com/zEIsQeL.png)
+</details>
+
  
  ---
+<details>
+<summary>:gear: Development:</summary>
 
 **If you would like to contribute, these fixes & additions are the current priorities (but suggestions are welcome):**
-* Bugs:
+* :bug: Bugs:
   * Equation numeration carries between emails in a chain, but excludes minimized emails
-* Features:
+* :gem: Features:
   * Support for email drafting
   * Support for Gmail vertical split and horizontal split modes
+  * :accessibility: "Shift+L" as Gmail shortcut to trigger TeX button (hit Shift+? to see the current list)
   * Add descriptive comments to the userscript to accomodate code reviews and user edits
   * Enable [trust option](https://katex.org/docs/options) to allow use of `\href`, `\includegraphics`, and `\url`
   * Disable [strict option](https://katex.org/docs/options) to allow more flexible LaTeX and use of `\htmlClass`, `\htmlData`, `\htmlId`, and `\htmlStyle` (all also require enabling trust option)
@@ -60,6 +71,8 @@ Once you have a browser script manager extension installed on your browser:
       * It seems the ideal would be to still use KaTeX for math environments due to superior handling there, but LaTeX.js for everything else.
     * Packages - Introducing LaTeX packages that allow for special formatting and characters beyond what is already available.
       * Particularly, TikZ would be pretty neat
----
+</details>
 
+
+---
 Special thanks to the [KaTeX organization](https://katex.org/) - without which, this would not be possible.
