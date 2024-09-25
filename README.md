@@ -39,11 +39,11 @@ LaTeX code is compiled automatically upon opening an email or expanding an email
 **Accepted math environment delimiters include:**
 * Inline mode:
   * `[; ... ;]`
-  * `\\( ... \\)`
+  * `\( ... \)`
   * `\begin{math} ... \end{math}`
 * Display mode:
   * `[(; ... ;)]`
-  * `\\[ ... \\]`
+  * `\[ ... \]`
   * `\begin{displaymath} ... \end{displaymath}`
   * `\begin{equation} ... \end{equation}` — *Numerated*
 
