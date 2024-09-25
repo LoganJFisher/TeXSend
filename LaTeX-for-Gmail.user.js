@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         5.1.0
+// @version         5.2.0
 // @description     Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -14,6 +14,7 @@
 // @grant           GM_addElement
 // @grant           GM_addStyle
 // @require         https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js
+// @require         https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/mhchem.min.js
 // ==/UserScript==
 
 /* globals katex */
