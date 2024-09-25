@@ -4,7 +4,8 @@ Almost everything that is on the [KaTeX Support Table](https://katex.org/docs/su
 The only exceptions require `trust` to be enabled (planned) or `strict` to be disabled (planned).
 
 > [!IMPORTANT]
-> This does not change the actual content of the email in any way. As such, the compiled LaTeX is only on your end. The recipient of an email will also need to be running this userscript in order to compile on their end.
+> This does not change the content of emails in any way. Email recipients will also need to run this userscript to compile on their end.<br>
+> Additionally, the compiling is performed entirely locally - the content of the emails is not transmitted to any server.
 
 > [!WARNING]
 > This does not currently support email drafts or split views.
