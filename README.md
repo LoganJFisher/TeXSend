@@ -1,9 +1,13 @@
-## This userscript adds a "TeX" button to the action bar at the top of an open email on https://mail.google.com. When clicked, this causes TeX code to toggle between compiled and plain text states.
+## This userscript adds a "TeX" button to the action bar at the top of an open email on Gmail. When clicked, this causes LaTeX code to toggle between compiled and plain text states.
 
-Everything that is on the [KaTeX Support Table](https://katex.org/docs/support_table) is supported by this userscript. That includes all standard equation elements, matrices, arrays, and lots more.
+Almost everything that is on the [KaTeX Support Table](https://katex.org/docs/support_table) is supported by this userscript. That includes all standard equation elements, matrices, arrays, and lots more.
+The only exceptions require `trust` to be enabled (planned) or `strict` to be disabled (planned).
 
-It should be noted that this does not change the actual content of the email in any way. As such, the compiled LaTeX is only on your end. The recipient of an email will also need to be running this userscript in order to compile on their end.
+> [!IMPORTANT]
+> This does not change the actual content of the email in any way. As such, the compiled LaTeX is only on your end. The recipient of an email will also need to be running this userscript in order to compile on their end.
 
+> [!WARNING]
+> This does not currently support email drafts or split views.
 ---
 ### Installation Guide:
 
@@ -17,14 +21,10 @@ This requires the use of a browser script manager. Violentmonkey is recommended,
 Once you have a browser script manager extension installed on your browser:
 * Click [this link](https://github.com/LoganJFisher/LaTeX-for-Gmail/raw/refs/heads/main/LaTeX-for-Gmail.user.js)
 * On the new tab, click "Install" (on the left for Violentmonkey)
-* Refresh any open Gmail tabs to use it
+* Refresh any open Gmail tabs
 
 ---
 ### Use Guide:
-
-This userscript currently only works when Gmail is in "no split" mode (default).
-
-This userscript currently only works for emails that have been sent or received, not simply drafted.
 
 [KaTeX-supported environments](https://katex.org/docs/support_table) (i.e. anything on their list which starts with `\begin`) (e.g. `\begin{bmatrix}` and `\begin{array}`) can be called at any place in an email. In addition to these, a set of additional delimiters have been added to allow you to create inline and display math environments with ease.
 
@@ -39,7 +39,8 @@ This userscript currently only works for emails that have been sent or received,
   * `\begin{displaymath} ... \end{displaymath}`
   * `\begin{equation} ... \end{equation}` — *Numerated*
  
-  Note: Use `\displaystyle` inside of inline delimiters to compile your equation as display mode with line breaks. e.g. `\(\displaystyle E=mc^{2}\)`
+> [!TIP]
+> Use `\displaystyle` inside inline delimiters to compile as display mode with line breaks. Example: `\(\displaystyle E=mc^{2}\)`
  
  ![Example of LaTeX for Gmail in action](https://i.imgur.com/zEIsQeL.png)
  
