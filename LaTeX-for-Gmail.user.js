@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         5.4.0
+// @version         5.5.0
 // @description     Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -61,7 +61,7 @@ const DELIMITERS = [
     {left: '\\begin{pmatrix}' , right: '\\end{pmatrix}', display: true, includeDelimiter: true},
     {left: '\\begin{pmatrix*}' , right: '\\end{pmatrix*}', display: true, includeDelimiter: true},
     {left: '\\begin{rcases}' , right: '\\end{rcases}', display: true, includeDelimiter: true},
-    {left: '\\begin{smallmatrix}' , right: '\\end{smallmatrix}', display: false, includeDelimiter: true},  //Take note that display is false on this one
+    {left: '\\begin{smallmatrix}' , right: '\\end{smallmatrix}', display: false, includeDelimiter: true}, //Take note that display is false on this one
     {left: '\\begin{split}' , right: '\\end{split}', display: true, includeDelimiter: true},
     {left: '\\begin{subarray}' , right: '\\end{subarray}', display: true, includeDelimiter: true},
     {left: '\\begin{Vmatrix}' , right: '\\end{Vmatrix}', display: true, includeDelimiter: true},
@@ -162,19 +162,35 @@ function addButton() {
     latexButton.addEventListener('mouseout', () => latexButton.classList.remove('T-I-JW'));
 }
 
+function addShortcuts() {
+    const keyHandler = (e) => {
+        if (e.shiftKey && e.code === 'KeyL') {
+            toggleLatex()
+        } else if (e.shiftKey && e.code === 'Slash') {
+            // temp solution
+            setTimeout( () => {
+                const row = document.querySelector("body > div.wa > div > div > table.cf.wd.aNO > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(2)");
+                const html = '<td class="wg Dn"><span class="wh">Shift</span> <span class="wb">+</span> <span class="wh">L</span> :</td><td class="we Dn">Toggle LaTeX</td>';
+                row.innerHTML = html;
+            }, 10);
+        }
+    }
 
+    window.addEventListener('keypress', keyHandler);
+}
+ 
 function main() {
     if (window.trustedTypes && window.trustedTypes.createPolicy && !window.trustedTypes.defaultPolicy) {
         window.trustedTypes.createPolicy('default', {
             createHTML: string => string
         });
     }
- 
+
     GM_addElement('link', {
         rel: "stylesheet",
         href: "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.css"
     });
- 
+
     GM_addStyle(`
         .katex-display {
             max-width: 99%;
@@ -183,7 +199,9 @@ function main() {
             counter-reset: katexEqnNo;
         }
     `);
- 
+
+    addShortcuts();
+
     waitForElement(selectors.topBar).then(topbar => {
         GM_registerMenuCommand('Toggle LaTeX', toggleLatex);
         const observer = new MutationObserver( () => {
