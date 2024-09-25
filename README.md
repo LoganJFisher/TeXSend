@@ -63,7 +63,7 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
 
 **If you would like to contribute, these fixes & additions are the current priorities (but suggestions are welcome):**
 * :bug: Bugs:
-  * Make "Shift+L" stop replacing the "Focus previous message" shortcut in Gmail's "Shift+?" shortcuts list.
+  * None known at this time! :smile:
 * :gem: Features:
   * Support for email drafting.
   * Support for Gmail vertical split and horizontal split modes.
