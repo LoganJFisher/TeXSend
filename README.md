@@ -32,6 +32,8 @@ Once you have a browser script manager extension installed on your browser:
 <details>
 <summary>:writing_hand: Use Guide:</summary>
 
+LaTeX code is compiled automatically upon opening an email or expanding an email in a chain. To toggle it off (or back on), click the $\TeX$ button on the action bar at the top of the email.
+
 [KaTeX-supported environments](https://katex.org/docs/support_table) (i.e. anything on their list which starts with `\begin`) (e.g. `\begin{bmatrix}` and `\begin{array}`) can be called at any place in an email. In addition to these, a set of additional delimiters have been added to allow you to create inline and display math environments with ease.
 
 **Accepted math environment delimiters include:**
@@ -44,11 +46,10 @@ Once you have a browser script manager extension installed on your browser:
   * `\\[ ... \\]`
   * `\begin{displaymath} ... \end{displaymath}`
   * `\begin{equation} ... \end{equation}` — *Numerated*
+
+:bulb: Use `\displaystyle` inside inline delimiters to compile as display mode with line breaks. Example: `\(\displaystyle E=mc^{2}\)`
  
-> [!TIP]
-> Use `\displaystyle` inside inline delimiters to compile as display mode with line breaks. Example: `\(\displaystyle E=mc^{2}\)`
- 
- ![Example of LaTeX for Gmail in action](https://i.imgur.com/zEIsQeL.png)
+![Example of LaTeX for Gmail in action](https://i.imgur.com/zEIsQeL.png)
 </details>
 
  
@@ -58,7 +59,7 @@ Once you have a browser script manager extension installed on your browser:
 
 **If you would like to contribute, these fixes & additions are the current priorities (but suggestions are welcome):**
 * :bug: Bugs:
-  * Equation numeration carries between emails in a chain, but excludes minimized emails
+  * None known at this time! :smile:
 * :gem: Features:
   * Support for email drafting
   * Support for Gmail vertical split and horizontal split modes
