@@ -78,8 +78,6 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
     * Incorporate [LaTeX.js](https://latex.js.org/).
       * This was briefly toyed with, but only partial support with lots of issues was achieved.
         * It seems the ideal would be to still use KaTeX for math environments due to superior handling there, but LaTeX.js for general document formatting.
-      * Packages - Introducing LaTeX packages that allow for special formatting and characters beyond what is already available.
-        * Particularly, TikZ would be pretty neat.
 </details>
 
 ---
