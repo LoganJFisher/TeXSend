@@ -69,7 +69,7 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
   * Support for Gmail vertical split and horizontal split modes.
   * Enable [trust option](https://katex.org/docs/options) to allow use of `\href`, `\includegraphics`, and `\url`.
   * Disable [strict option](https://katex.org/docs/options) to allow more flexible LaTeX and use of `\htmlClass`, `\htmlData`, `\htmlId`, and `\htmlStyle` (all also require enabling trust option).
-  * Add [TikZJax]([https://tikzjax.com/](https://github.com/kisonecat/tikzjax)) support.
+  * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
   * Change equation numeration to maintain a count throughout emails in a chain, keeping track even when minimized.
   * Add descriptive comments to the userscript to accomodate code reviews and user edits.
 * :thought_balloon: Pipe Dreams:
