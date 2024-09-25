@@ -62,22 +62,23 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
 
 **If you would like to contribute, these fixes & additions are the current priorities (but suggestions are welcome):**
 * :bug: Bugs:
-  * Make "Shift+L" stop replacing the "Focus last message" shortcut in Gmail's "Shift+?" shortcuts list
+  * Make "Shift+L" stop replacing the "Focus last message" shortcut in Gmail's "Shift+?" shortcuts list.
 * :gem: Features:
-  * Support for email drafting
-  * Support for Gmail vertical split and horizontal split modes
-  * Add descriptive comments to the userscript to accomodate code reviews and user edits
-  * Enable [trust option](https://katex.org/docs/options) to allow use of `\href`, `\includegraphics`, and `\url`
-  * Disable [strict option](https://katex.org/docs/options) to allow more flexible LaTeX and use of `\htmlClass`, `\htmlData`, `\htmlId`, and `\htmlStyle` (all also require enabling trust option)
+  * Support for email drafting.
+  * Support for Gmail vertical split and horizontal split modes.
+  * Enable [trust option](https://katex.org/docs/options) to allow use of `\href`, `\includegraphics`, and `\url`.
+  * Disable [strict option](https://katex.org/docs/options) to allow more flexible LaTeX and use of `\htmlClass`, `\htmlData`, `\htmlId`, and `\htmlStyle` (all also require enabling trust option).
+  * Change equation numeration to maintain a count throughout emails in a chain, keeping track even when minimized.
+  * Add descriptive comments to the userscript to accomodate code reviews and user edits.
 * :thought_balloon: Pipe Dreams:
   * These will most likely not be pursued, barring a contributor deciding to take the initiative on their own:
-    * Support for other popular email services (e.g. Outlook, Yahoo Mail, ProtonMail, AOL Mail, etc.)
-      * This project would then be renamed "LaTeX for Email"
-    * Incorporate [LaTeX.js](https://latex.js.org/)
+    * Support for other popular email services (e.g. Outlook, Yahoo Mail, ProtonMail, AOL Mail, etc.).
+      * This project would then be renamed "LaTeX for Email".
+    * Incorporate [LaTeX.js](https://latex.js.org/).
       * This was briefly toyed with, but only partial support with lots of issues was achieved.
         * It seems the ideal would be to still use KaTeX for math environments due to superior handling there, but LaTeX.js for general document formatting.
       * Packages - Introducing LaTeX packages that allow for special formatting and characters beyond what is already available.
-        * Particularly, TikZ would be pretty neat
+        * Particularly, TikZ would be pretty neat.
 </details>
 
 ---
