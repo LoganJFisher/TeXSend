@@ -4,8 +4,8 @@ Almost everything that is on the [KaTeX Support Table](https://katex.org/docs/su
 The only exceptions require `trust` to be enabled (planned) or `strict` to be disabled (planned).
 
 > [!IMPORTANT]
-> This does not change the content of emails in any way. Email recipients will also need to run this userscript to compile on their end.<br>
-> Additionally, the compiling is performed entirely locally - the content of the emails is not transmitted to any server.
+> * This does not change the content of emails in any way. Email recipients will also need to run this userscript to compile on their end.<br>
+> * The compiling is performed entirely locally - the content of emails is not transmitted to any server by this userscript.
 
 > [!WARNING]
 > This does not currently support email drafts or split views.
