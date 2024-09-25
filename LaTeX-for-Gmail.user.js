@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         5.5.3
+// @version         5.5.4
 // @description     Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -110,24 +110,6 @@ function refreshLatex(){
 function toggleLatex() {
     LATEX_TOGGLE_STATE = !LATEX_TOGGLE_STATE;
     refreshLatex();
-}
-
-function waitForElement(queryString) {
-    let count = 0;
-    return new Promise((resolve, reject) => {
-        let findInterval = setInterval(() => {
-            let waitElement = document.querySelector(queryString);
-            if(waitElement) {
-                clearInterval(findInterval);
-                resolve(waitElement);
-            } else if(count > 100) {
-                clearInterval(findInterval);
-                reject(`Couldn't find waitElement: ${queryString}.`);
-            } else {
-                count += 1;
-            }
-        }, 100);
-    });
 }
 
 function observeMessages() {
