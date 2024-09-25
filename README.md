@@ -52,6 +52,8 @@ This userscript currently only works for emails that have been sent or received,
   * Support for email drafting
   * Support for Gmail vertical split and horizontal split modes
   * Add descriptive comments to the userscript to accomodate code reviews and user edits
+  * Enable [trust option](https://katex.org/docs/options) to allow use of `\href`, `\includegraphics`, and `\url`
+  * Disable [strict option](https://katex.org/docs/options) to allow more flexible LaTeX and use of `\htmlClass`, `\htmlData`, `\htmlId`, and `\htmlStyle` (all also require enabling trust option)
   * Incorporate [LaTeX.js](https://latex.js.org/)
     * This has been toyed with, but only partial support with lots of issues was achieved.
       * It seems the ideal would be to still use KaTeX for math environments due to superior handling there, but LaTeX.js for everything else.
