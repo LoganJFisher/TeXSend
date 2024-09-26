@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         5.5.4
-// @description     Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
+// @version         5.6.0
+// @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
 // @namespace       https://github.com/LoganJFisher/LaTeX-for-Gmail/
@@ -26,7 +26,9 @@ const selectors = {
     topBar: 'div#\\:4',
     moveButton: 'div#\\:4 div[title="Move to"]',
     messageList: '#\\:1 div[role=list]',
-    messageBody: '#\\:1 [role=list] > [role=listitem][aria-expanded=true] [data-message-id] > div > div > div[id^=":"][jslog]',
+    messageBody: '#\\:1 [role=list] > [role=listitem] [data-message-id] > div > div > div[id^=":"][jslog]',
+    draftBody: 'div[aria-label="Message Body"]',
+    sendButton: 'div[role=button][aria-label^=Send]',
 }
 
 const DELIMITERS = [
@@ -84,7 +86,7 @@ function buildRegex(delims) {
 }
 
 function renderLatex(html) {
-    html = html.replace(/<wbr>|&nbsp;/gs, ''); // fixes parsing of long expressions (GMAIL inserts <wbr> tags for some reason) & removes white spaces after delimiters
+    html = html.replace(/<wbr>/gs, '').replace(/&nbsp;/gs, ' '); // fixes parsing of long expressions (GMAIL inserts <wbr> tags for some reason) & removes white spaces after delimiters
     const div = document.createElement('div');
 
     html = html.replace(REGEX, function() {
@@ -98,19 +100,35 @@ function renderLatex(html) {
 }
 
 function refreshLatex(){
-    const messages = document.querySelectorAll(selectors.messageBody);
+    const messages = document.querySelectorAll( [selectors.messageBody, selectors.draftBody].join(',') );
     messages.forEach(message => {
-        message.oldHTML = message.oldHTML || message.innerHTML;
-        message.cachedLatex = message.cachedLatex || renderLatex(message.innerHTML);
+        if (LATEX_TOGGLE_STATE === message.rendered) return;
 
-        message.innerHTML = LATEX_TOGGLE_STATE ? message.cachedLatex : message.oldHTML;
+        if (LATEX_TOGGLE_STATE && !message.rendered) {
+            message.oldHTML = message.innerHTML;
+            message.innerHTML = renderLatex(message.innerHTML);
+            message.rendered = true;
+        } else {
+            message.oldHTML && (message.innerHTML = message.oldHTML);
+            message.rendered = false;
+        }
     });
 }
 
 function toggleLatex() {
     LATEX_TOGGLE_STATE = !LATEX_TOGGLE_STATE;
     refreshLatex();
+
+    const sendButton = document.querySelector(selectors.sendButton);
+    sendButton && sendButton.addEventListener('click', beforeSend, true);
 }
+
+function beforeSend(e) {
+    // make sure we are sending the plain text not HTML;
+    const draft = e.currentTarget.closest('table').parentElement.closest('table').querySelector(selectors.draftBody);
+    draft && draft.rendered && (draft.innerHTML = draft.oldHTML);
+}
+
 
 function observeMessages() {
     const messageList = document.querySelector(selectors.messageList);
@@ -161,9 +179,8 @@ function waitForElement(queryString, interval=100, maxTries=100) {
         }, interval);
     });
 }
- 
-// ========================================
- 
+
+
 function addShortcuts() {
     const keyHandler = (e) => {
         if (e.shiftKey && e.code === 'KeyL') {
@@ -177,10 +194,10 @@ function addShortcuts() {
             });
         }
     }
- 
+
     window.addEventListener('keypress', keyHandler);
 }
- 
+
 function main() {
     if (window.trustedTypes && window.trustedTypes.createPolicy && !window.trustedTypes.defaultPolicy) {
         window.trustedTypes.createPolicy('default', {
