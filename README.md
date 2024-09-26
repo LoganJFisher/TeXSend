@@ -8,7 +8,8 @@ The only exceptions require `trust` to be enabled (planned) or `strict` to be di
 > * The compiling is performed entirely locally - the content of emails is not transmitted to any server by this userscript.
 
 > [!WARNING]
-> This does not currently support email drafts or split views.
+> This does not currently support Gmail split views.<br>
+> Anything typed in draft mode while TeX compiling is on will be lost upon toggling compile off!
 
 
 ---
@@ -63,9 +64,12 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
 
 **If you would like to contribute, these fixes & additions are the current priorities (but suggestions are welcome):**
 * :bug: Bugs:
-  * None known at this time! :smile:
+  * Fix data loss in draft when toggling off compile (at the very least, disable the ability to type while compile is active)
 * :gem: Features:
-  * Support for email drafting.
+  * Change shortcut to `ctrl+shift+L` to be more easily compatible with draft mode.
+  * Remove current button control of (but keep shortcut control of), and create dedicated buttons to toggle TeX compile for:
+    * Reply draft
+    * Compose draft
   * Support for Gmail vertical split and horizontal split modes.
   * Enable [trust option](https://katex.org/docs/options) to allow use of `\href`, `\includegraphics`, and `\url`.
   * Disable [strict option](https://katex.org/docs/options) to allow more flexible LaTeX and use of `\htmlClass`, `\htmlData`, `\htmlId`, and `\htmlStyle` (all also require enabling trust option).
