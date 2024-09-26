@@ -9,7 +9,7 @@ The only exceptions require `trust` to be enabled (planned) or `strict` to be di
 
 > [!WARNING]
 > This does not currently support Gmail split views.<br>
-> Anything typed in draft mode while TeX compiling is on will be lost upon toggling compile off!
+> Anything typed in draft mode while TeX compiling is turned on WILL DISAPPEAR! You can toggle compile, but only type when it is off!
 
 
 ---
