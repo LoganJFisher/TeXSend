@@ -67,7 +67,8 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
   * Fix data loss in draft when toggling off compile (at the very least, disable the ability to type while compile is active)
     * If the disable route is taken, add a banner that appears in the draft window when compile is on, explaining that compile needs to be turned off to continue typing.
 * :gem: Features:
-  * Change shortcut to `ctrl+shift+L` to be more easily compatible with draft mode.
+  * Change shortcut (perhaps to `ctrl+alt+L`) to be more easily compatible with draft mode.
+    * Should it be possible to right-click the TeX button to customize this? How would that information be saved that wouldn't be wiped with a subsequent userscript update?
   * Remove current button control of (but keep shortcut control of), and create dedicated buttons to toggle TeX compile for:
     * Reply draft
     * Compose draft
