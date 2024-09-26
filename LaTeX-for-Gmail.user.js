@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
 // @version         5.6.0
-// @description     Adds a button to Gmail which toggles LaTeX rendering using traditional LaTeX and TeXTheWorld delimiters
+// @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
 // @namespace       https://github.com/LoganJFisher/LaTeX-for-Gmail/
