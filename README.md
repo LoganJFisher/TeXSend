@@ -65,6 +65,7 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
 **If you would like to contribute, these fixes & additions are the current priorities (but suggestions are welcome):**
 * :bug: Bugs:
   * Fix data loss in draft when toggling off compile (at the very least, disable the ability to type while compile is active)
+    * If the disable route is taken, add a banner that appears in the draft window when compile is on, explaining that compile needs to be turned off to continue typing.
 * :gem: Features:
   * Change shortcut to `ctrl+shift+L` to be more easily compatible with draft mode.
   * Remove current button control of (but keep shortcut control of), and create dedicated buttons to toggle TeX compile for:
