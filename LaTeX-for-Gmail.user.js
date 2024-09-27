@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         5.6.0
+// @version         5.6.1
 // @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -93,7 +93,7 @@ function renderLatex(html) {
         const groups = arguments[arguments.length - 1];
         const display = groups.d !== undefined;
         div.innerHTML = groups.tex;
-        return katex.renderToString(div.textContent, {throwOnError: false, displayMode: display})
+        return katex.renderToString(div.textContent, {throwOnError: false, displayMode: display, trust: true, strict: false})
     })
 
     return html;
