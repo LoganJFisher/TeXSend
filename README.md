@@ -43,7 +43,7 @@ Once you have a browser script manager extension installed on your browser:
 
 LaTeX code is compiled automatically upon opening an email or expanding an email in a chain. To toggle it off (or back on), click the $\TeX$ button on the action bar at the top of the email.
 
-$~~~~$:accessibility: Ctrl+Alt+L also works as a shortcut to toggle TeX compiling.
+$~~~~$:accessibility: Ctrl+Alt+L also works as a shortcut to toggle TeX compiling (only for sent & received emails, not drafts).
 
 [KaTeX-supported environments](https://katex.org/docs/support_table) (i.e. anything on their list which starts with `\begin`) (e.g. `\begin{bmatrix}` and `\begin{array}`) can be called at any place in an email. In addition to these, a set of additional delimiters have been added to allow you to create inline and display math environments with ease.
 
