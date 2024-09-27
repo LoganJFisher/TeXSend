@@ -73,7 +73,7 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
 
 **If you would like to contribute, these fixes & additions are the current priorities (but suggestions are welcome):**
 * :bug: Bugs:
-  * Move draft banner to top of draft so it can't be blocked from view
+  * No known bugs at this time! :smile:
 * :gem: Features:
   * Create an email signature template that helps bring attention to L4G
   * Make it possible to right-click the TeX buttons to customize their shortcuts.
