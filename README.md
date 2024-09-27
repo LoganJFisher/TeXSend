@@ -9,8 +9,7 @@ Everything that is on the [KaTeX Support Table](https://katex.org/docs/support_t
 > * The compiling is performed entirely locally - the content of emails is not transmitted to any server by this userscript.
 
 > [!WARNING]
-> * This does not currently support Gmail split views.<br>
-> * Anything typed in draft mode while TeX compiling is turned on WILL DISAPPEAR! You can toggle compile, but only type when it is off!
+> * This does not currently support Gmail split views.
 
 
 ---
@@ -65,13 +64,9 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
 
 **If you would like to contribute, these fixes & additions are the current priorities (but suggestions are welcome):**
 * :bug: Bugs:
-  * Fix data loss in draft when toggling off compile (at the very least, disable the ability to type while compile is active)
-    * If the disable route is taken, add a banner that appears in the draft window when compile is on, explaining that compile needs to be turned off to continue typing.
+  * Move draft banner to top of draft so it can't be blocked from view
 * :gem: Features:
   * Create an email signature template that helps bring attention to L4G
-  * Remove current button control of, and create dedicated buttons to toggle TeX compile for:
-    * Reply draft
-    * Compose draft
   * Make it possible to right-click the TeX buttons to customize their shortcuts.
     * Could this be saved to a config.json in the browser's local storage such that it wouldn't be lost with userscript updates, and would be resilient to deleting browser cookies?
   * Support for Gmail vertical split and horizontal split modes.
