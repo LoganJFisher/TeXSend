@@ -35,7 +35,7 @@ Once you have a browser script manager extension installed on your browser:
 
 LaTeX code is compiled automatically upon opening an email or expanding an email in a chain. To toggle it off (or back on), click the $\TeX$ button on the action bar at the top of the email.
 
-$~~~~$:accessibility: Shift+L also works as a shortcut to toggle TeX compiling.
+$~~~~$:accessibility: Ctrl+Alt+L also works as a shortcut to toggle TeX compiling.
 
 [KaTeX-supported environments](https://katex.org/docs/support_table) (i.e. anything on their list which starts with `\begin`) (e.g. `\begin{bmatrix}` and `\begin{array}`) can be called at any place in an email. In addition to these, a set of additional delimiters have been added to allow you to create inline and display math environments with ease.
 
@@ -69,8 +69,8 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
   * Remove current button control of, and create dedicated buttons to toggle TeX compile for:
     * Reply draft
     * Compose draft
-  * Change shortcut (perhaps to `ctrl+alt+L`) to be more easily compatible with draft mode.
-    * Should it be possible to right-click the TeX buttons to customize this? How would that information be saved that wouldn't be wiped with a subsequent userscript update?
+  * Make it possible to right-click the TeX buttons to customize their shortcuts.
+    * How would that information be saved that wouldn't be wiped with a subsequent userscript update?
   * Support for Gmail vertical split and horizontal split modes.
   * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
     * Completely unrelated to KaTeX, but should be compatible.
