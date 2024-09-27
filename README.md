@@ -1,7 +1,6 @@
 ## This userscript adds a "TeX" button to the action bar at the top of an open email on Gmail. When clicked, this causes LaTeX code to toggle between compiled and plain text states.
 
-Almost everything that is on the [KaTeX Support Table](https://katex.org/docs/support_table) is supported by this userscript. That includes all standard equation elements, matrices, arrays, and lots more.
-The only exceptions require `trust` to be enabled (planned) or `strict` to be disabled (planned).
+Everything that is on the [KaTeX Support Table](https://katex.org/docs/support_table) is supported by this userscript. That includes all standard equation elements, matrices, arrays, and lots more.
 
 > [!IMPORTANT]
 > * This does not change the content of emails in any way. Email recipients will also need to run this userscript to compile on their end.<br>
@@ -73,8 +72,6 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
     * Reply draft
     * Compose draft
   * Support for Gmail vertical split and horizontal split modes.
-  * Enable [trust option](https://katex.org/docs/options) to allow use of `\href`, `\includegraphics`, and `\url`.
-  * Disable [strict option](https://katex.org/docs/options) to allow more flexible LaTeX and use of `\htmlClass`, `\htmlData`, `\htmlId`, and `\htmlStyle` (all also require enabling trust option).
   * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
     * Completely unrelated to KaTeX, but should be compatible.
     * TikZ uses `\begin{tikzpicture}` delimiters.
