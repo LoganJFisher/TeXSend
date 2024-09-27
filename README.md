@@ -68,11 +68,12 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
   * Fix data loss in draft when toggling off compile (at the very least, disable the ability to type while compile is active)
     * If the disable route is taken, add a banner that appears in the draft window when compile is on, explaining that compile needs to be turned off to continue typing.
 * :gem: Features:
+  * Create an email signature template that helps bring attention to L4G
   * Remove current button control of, and create dedicated buttons to toggle TeX compile for:
     * Reply draft
     * Compose draft
   * Make it possible to right-click the TeX buttons to customize their shortcuts.
-    * How would that information be saved that wouldn't be wiped with a subsequent userscript update?
+    * Could this be saved to a config.json in the browser's local storage such that it wouldn't be lost with userscript updates, and would be resilient to deleting browser cookies?
   * Support for Gmail vertical split and horizontal split modes.
   * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
     * Completely unrelated to KaTeX, but should be compatible.
@@ -80,12 +81,13 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
   * Change equation numeration to maintain a count throughout emails in a chain, keeping track even when minimized.
   * Add descriptive comments to the userscript to accomodate code reviews and user edits.
 * :thought_balloon: Pipe Dreams:
-  * These will most likely not be pursued, barring a contributor deciding to take the initiative on their own:
+  * These will most likely not be pursued, barring a contributor volunteering to put forth the massive effort involved.
     * Support for other popular email services (e.g. Outlook, Yahoo Mail, ProtonMail, AOL Mail, etc.).
+      * Request for Outlook at first priority
       * This project would then be renamed "LaTeX for Email".
     * Incorporate [LaTeX.js](https://latex.js.org/).
       * This was briefly toyed with, but only partial support with lots of issues was achieved.
-        * It seems the ideal would be to still use KaTeX for math environments due to superior handling there, but LaTeX.js for general document formatting.
+        * It seems the ideal would be to still use KaTeX for math environments, and TikZJax for TikZ envionrments, but LaTeX.js would be useful for general document formatting.
 </details>
 
 ---
