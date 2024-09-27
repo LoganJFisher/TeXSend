@@ -7,8 +7,8 @@ Everything that is on the [KaTeX Support Table](https://katex.org/docs/support_t
 > * The compiling is performed entirely locally - the content of emails is not transmitted to any server by this userscript.
 
 > [!WARNING]
-> This does not currently support Gmail split views.<br>
-> Anything typed in draft mode while TeX compiling is turned on WILL DISAPPEAR! You can toggle compile, but only type when it is off!
+> * This does not currently support Gmail split views.<br>
+> * Anything typed in draft mode while TeX compiling is turned on WILL DISAPPEAR! You can toggle compile, but only type when it is off!
 
 
 ---
