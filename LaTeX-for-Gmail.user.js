@@ -94,7 +94,7 @@ function renderLatex(html) {
         const groups = arguments[arguments.length - 1];
         const display = groups.d !== undefined;
         div.innerHTML = groups.tex;
-        return katex.renderToString(div.textContent, {throwOnError: false, displayMode: display})
+        return katex.renderToString(div.textContent, {throwOnError: false, displayMode: display, trust: true, strict: false})
     })
 
     return html;
