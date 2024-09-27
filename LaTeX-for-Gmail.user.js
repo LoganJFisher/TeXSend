@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         5.6.1
+// @version         5.6.2
 // @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -182,20 +182,18 @@ function waitForElement(queryString, interval=100, maxTries=100) {
 
 
 function addShortcuts() {
-    const keyHandler = (e) => {
-        if (e.shiftKey && e.code === 'KeyL') {
-            toggleLatex()
-        } else if (e.shiftKey && e.code === 'Slash') {
+    document.addEventListener('keydown', (event) => {
+        if (event.ctrlKey && event.altKey && event.keyCode === 76) { //'L'
+            toggleLatex();
+        } else if (event.shiftKey && event.keyCode === 191) { //'?'
             waitForElement('body > div.wa:not(.aou) > div[role=alert]', 5).then(d => {
                 const xpath = '//tr[th/text()="Formatting"]/following-sibling::tr';
                 const row = document.evaluate(xpath, d, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-                const html = '<td class="wg Dn"><span class="wh">Shift</span> <span class="wb">+</span> <span class="wh">L</span> :</td><td class="we Dn">Toggle LaTeX</td>';
+                const html = '<td class="wg Dn"><span class="wh">Ctrl</span> <span class="wb">+</span> <span class="wh">Alt</span> <span class="wb">+</span> <span class="wh">L</span> :</td><td class="we Dn">Toggle LaTeX</td>';
                 row.innerHTML = html;
             });
         }
-    }
-
-    window.addEventListener('keypress', keyHandler);
+    });
 }
 
 function main() {
