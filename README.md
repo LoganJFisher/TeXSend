@@ -72,11 +72,7 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
 * :bug: Bugs:
   * No known bugs at this time! :smile:
 * :gem: Features:
-  * Make it possible to right-click the TeX buttons to customize their shortcuts.
-    * Could this be saved to a config.json in the browser's local storage such that it wouldn't be lost with userscript updates, and would be resilient to deleting browser cookies?
-    * One for email chain
-    * One for email reply drafts
-    * One for email compose drafts
+  * Shortcut for drafts
   * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
     * Completely unrelated to KaTeX, but should be compatible.
     * TikZ uses `\begin{tikzpicture}` delimiters.
