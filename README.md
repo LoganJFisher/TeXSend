@@ -79,14 +79,13 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
   * Change equation enumeration to maintain a count throughout emails in a chain, keeping track even when minimized.
   * Add descriptive comments to the userscript to accomodate code reviews and user edits.
 * :thought_balloon: Pipe Dreams:
-  * These are stretch goals. Don't be expecting them any time soon.
-    * Support for other popular email services (e.g. Outlook, Yahoo Mail, ProtonMail, AOL Mail, etc.).
-      * Request for Outlook at first priority.
-      * Each email service would be an independent userscript, not all in one.
-      * This repository would then be renamed.
-    * Incorporate [LaTeX.js](https://latex.js.org/).
-      * This was briefly toyed with, but only partial support with lots of issues was achieved.
-        * It seems the ideal would be to still use KaTeX for math environments, and TikZJax for TikZ envionrments, but LaTeX.js would be useful for general document formatting.
+  * Support for other popular email services (e.g. Outlook, Yahoo Mail, ProtonMail, AOL Mail, etc.).
+    * Request for Outlook at first priority.
+    * Each email service would be an independent userscript, not all in one.
+    * This repository would then be renamed.
+  * Incorporate [LaTeX.js](https://latex.js.org/).
+    * This was briefly toyed with, but only partial support with lots of issues was achieved.
+      * It seems the ideal would be to still use KaTeX for math environments, and TikZJax for TikZ envionrments, but LaTeX.js would be useful for general document formatting.
 </details>
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
