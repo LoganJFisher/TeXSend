@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         6.0.1
+// @version         6.0.2
 // @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -25,7 +25,7 @@ const selectors = {
     moveButton: 'div#\\:4 div[title="Move to"], div[aria-label="Move to"]',
     messageList: '#\\:1 div[role=list]',
     messageBody: '#\\:1 [role=list] > [role=listitem] [data-message-id] > div > div > div[id^=":"][jslog]',
-    draftsContainer: 'body > div.dw',
+    draftsContainer: 'body > div.dw > div > div > div > div:first-child',
     draftRegion: 'div[role=region]',
     draftBody: 'div[aria-label="Message Body"]',
     sendButton: 'div[role=button][aria-label^=Send]',
@@ -152,7 +152,6 @@ function observeMessages() {
     if (!messageList) return;
 
     const itemObserver = new MutationObserver( () => {
-        console.log('message mutation observed');
         refreshMessages();
         processDrafts(messageList);
     });
@@ -198,12 +197,12 @@ function addDraftToggleButton(draft) {
     if (!buttonContainer) return;
     const button = GM_addElement(buttonContainer, 'div', {
         id: 'latex_toggle_draft_button',
-        class: 'wG J-Z-I',
+        class: 'J-Z-I',
         role: 'button',
         'data-tooltip': 'Toggle LaTeX',
     });
 
-    button.innerHTML = katex.renderToString('\\scriptsize \\TeX', {throwOnError: false});
+    button.innerHTML = katex.renderToString('\\footnotesize \\TeX', {throwOnError: false});
 
     const draftBody = draft.querySelector(selectors.draftBody);
     button.addEventListener('click', () => {
@@ -295,9 +294,12 @@ function addStyles() {
             user-select: none;
             width: 20px;
             height: 20px;
-            display: inline-flex;
-            align-items: flex-end;
-            margin: 4px 8px 4px -4px;
+            margin: 4px 16px 4px -4px;
+            color: var(--gm3-sys-color-on-surface);
+        }
+
+        #latex_toggle_draft_button > .katex .base {
+            display: flex;
         }
 
         #latex_draft_banner {
@@ -344,7 +346,7 @@ function init() {
         const observer = new MutationObserver( () => {
             processDrafts(draftsContainer);
         });
-        observer.observe(draftsContainer, {attributes: true});
+        observer.observe(draftsContainer, {childList: true});
     });
 }
 
