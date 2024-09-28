@@ -83,7 +83,7 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
   * Change equation enumeration to maintain a count throughout emails in a chain, keeping track even when minimized.
   * Add descriptive comments to the userscript to accomodate code reviews and user edits.
 * :thought_balloon: Pipe Dreams:
-  * These will most likely not be pursued, barring a contributor volunteering to put forth the massive effort involved.
+  * These are stretch goals - don't hold your breath unless you're willing to help.
     * Support for other popular email services (e.g. Outlook, Yahoo Mail, ProtonMail, AOL Mail, etc.).
       * Request for Outlook at first priority.
       * Each email service would be an independent userscript, not all in one.
