@@ -80,7 +80,7 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
   * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
     * Completely unrelated to KaTeX, but should be compatible.
     * TikZ uses `\begin{tikzpicture}` delimiters.
-  * Change equation numeration to maintain a count throughout emails in a chain, keeping track even when minimized.
+  * Change equation enumeration to maintain a count throughout emails in a chain, keeping track even when minimized.
   * Add descriptive comments to the userscript to accomodate code reviews and user edits.
 * :thought_balloon: Pipe Dreams:
   * These will most likely not be pursued, barring a contributor volunteering to put forth the massive effort involved.
