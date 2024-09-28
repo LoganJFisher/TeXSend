@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         6.0.2
+// @version         6.1.0
 // @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -31,6 +31,7 @@ const selectors = {
     sendButton: 'div[role=button][aria-label^=Send]',
     lockerButton: 'td:has(> div > div[command=locker])',
     splitHalf: 'div[jsname=h50Ewe] > div > div > div > div',
+    shortcutMenu: 'body > div.wa:not(.aou) > div[role=alert]',
 }
 
 const DELIMITERS = [
@@ -192,6 +193,14 @@ function processDrafts(container) {
     })
 }
 
+function toggleDraft(draft) {
+    const draftBody = draft.querySelector(selectors.draftBody);
+    updateLatex([draftBody], !draftBody.rendered)
+    draftBody.setAttribute('contenteditable', !draftBody.rendered);
+    draft.bannerDiv.style.visibility = draftBody.rendered ? 'visible': 'hidden';
+    draft.bannerDiv.style.marginBottom = draftBody.rendered ? '0px': '-30px';
+}
+
 function addDraftToggleButton(draft) {
     const buttonContainer = draft.querySelector(selectors.lockerButton);
     if (!buttonContainer) return;
@@ -204,13 +213,8 @@ function addDraftToggleButton(draft) {
 
     button.innerHTML = katex.renderToString('\\footnotesize \\TeX', {throwOnError: false});
 
-    const draftBody = draft.querySelector(selectors.draftBody);
-    button.addEventListener('click', () => {
-        updateLatex([draftBody], !draftBody.rendered)
-        draftBody.setAttribute('contenteditable', !draftBody.rendered);
-        draft.bannerDiv.style.visibility = draftBody.rendered ? 'visible': 'hidden';
-        draft.bannerDiv.style.marginBottom = draftBody.rendered ? '0px': '-30px';
-    });
+    button.addEventListener('click', () => toggleDraft(draft));
+    draft.addEventListener('keydown', draftShortcutHandler);
 }
 
 function addBanner(draft) {
@@ -231,6 +235,17 @@ function attachSendListener(draft) {
     sendButton.addEventListener('click', () => updateLatex([draftBody], false), true);
 }
 
+function draftShortcutHandler(event) {
+    if (event.ctrlKey && event.altKey && event.keyCode === 75) { //L
+        toggleDraft(event.currentTarget);
+    }
+
+    if (!event.currentTarget.closest('div[role=dialog]')) return; // apply below shortcut to compose draft only (already exists for replies)
+
+    if (event.ctrlKey && event.altKey && event.keyCode === 76) { // K
+        toggleMessages();
+    }
+}
 
 // ===================================================================================================
 // UTILS
@@ -255,15 +270,17 @@ function waitForElement(queryString, interval=100, maxTries=100) {
 
 
 function addShortcuts() {
+    const xpath = '//tr[th/text()="Formatting"]/following-sibling::tr';
+    const msg_ShortcutHTML = '<tr><td class="wg Dn"><span class="wh">Ctrl</span> <span class="wb">+</span> <span class="wh">Alt</span> <span class="wb">+</span> <span class="wh">L</span> :</td><td class="we Dn">Toggle LaTeX (inbox)</td></tr>';
+    const draft_ShortcutHTML = '<tr><td class="wg Dn"><span class="wh">Ctrl</span> <span class="wb">+</span> <span class="wh">Alt</span> <span class="wb">+</span> <span class="wh">K</span> :</td><td class="we Dn">Toggle LaTeX (draft)</td></tr>';
+
     document.addEventListener('keydown', (event) => {
         if (event.ctrlKey && event.altKey && event.keyCode === 76) { //'L'
             toggleMessages();
         } else if (event.shiftKey && event.keyCode === 191) { //'?'
-            waitForElement('body > div.wa:not(.aou) > div[role=alert]', 5).then(d => {
-                const xpath = '//tr[th/text()="Formatting"]/following-sibling::tr';
+            waitForElement(selectors.shortcutMenu, 5).then(d => {
                 const row = document.evaluate(xpath, d, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-                const html = '<td class="wg Dn"><span class="wh">Ctrl</span> <span class="wb">+</span> <span class="wh">Alt</span> <span class="wb">+</span> <span class="wh">L</span> :</td><td class="we Dn">Toggle LaTeX</td>';
-                row.innerHTML = html;
+                row.outerHTML = msg_ShortcutHTML + draft_ShortcutHTML;
             });
         }
     });
