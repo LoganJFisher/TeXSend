@@ -12,7 +12,7 @@ Everything that is on the [KaTeX Support Table](https://katex.org/docs/support_t
 > * The compiling is performed entirely locally - the content of emails is not transmitted to any server by this userscript.
 
 > [!WARNING]
-> * This does not currently support Gmail split views.
+> * Gmail split views do not currently have TeX buttons, but can be toggled via the extension menu or the shortcut.
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-----------------------------------------------------------------------------INSTALLATION GUIDE----------------------------------------------------------------------------->
@@ -75,9 +75,12 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
 * :bug: Bugs:
   * No known bugs at this time! :smile:
 * :gem: Features:
+  * Buttons for Gmail vertical split and horizontal split modes.
   * Make it possible to right-click the TeX buttons to customize their shortcuts.
-    * Could this be saved to a config.json in the browser's local storage such that it wouldn't be lost with userscript updates, and would be resilient to deleting browser cookies?
-  * Support for Gmail vertical split and horizontal split modes.
+    * Could this be saved to a config.json in the browser's local storage such that it wouldn't be lost with userscript updates, and would be resilient to deleting browser cookies/
+    * One for email chain
+    * One for email reply drafts
+    * One for email compose drafts
   * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
     * Completely unrelated to KaTeX, but should be compatible.
     * TikZ uses `\begin{tikzpicture}` delimiters.
