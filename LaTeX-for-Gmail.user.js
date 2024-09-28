@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         6.0.0
+// @version         6.0.1
 // @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -151,12 +151,21 @@ function observeMessages() {
     const messageList = document.querySelector(selectors.messageList);
     if (!messageList) return;
 
-    const messages = messageList.querySelectorAll('div[role=listitem]');
-    const observer = new MutationObserver( () => {
+    const itemObserver = new MutationObserver( () => {
+        console.log('message mutation observed');
         refreshMessages();
         processDrafts(messageList);
     });
-    messages.forEach( msg => observer.observe(msg, {attributes: true, attributeFilter: ["aria-expanded", "class"]}) );
+
+    function _observe() {
+        const messages = messageList.querySelectorAll('div[role=listitem]');
+        messages.forEach( msg => itemObserver.observe(msg, {attributes: true, attributeFilter: ["aria-expanded", "class"]}) );
+    }
+
+    const listObserver = new MutationObserver(_observe);
+    listObserver.observe(messageList, {childList: true});
+
+    _observe();
 }
 
 function refreshMessages() {
