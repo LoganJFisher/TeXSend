@@ -70,7 +70,7 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
 
 **If you would like to contribute, these fixes & additions are the current priorities (but suggestions are welcome):**
 * :bug: Bugs:
-  * No known bugs at this time! :smile:
+  * Reply on reply does not generate TeX button
 * :gem: Features:
   * Make it possible to right-click the TeX buttons to customize their shortcuts.
     * Could this be saved to a config.json in the browser's local storage such that it wouldn't be lost with userscript updates, and would be resilient to deleting browser cookies?
