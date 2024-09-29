@@ -90,18 +90,5 @@ Inside of a supported environment, you can use any of the many other functions p
       * It seems the ideal would be to still use KaTeX for math environments, and TikZJax for TikZ envionrments, but LaTeX.js would be useful for general document formatting.
 </details>
 
-<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-<!-----------------------------------------------------------------------------------LEGAL------------------------------------------------------------------------------------>
-<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
----
-<details>
-<summary>:balance_scale: Legal</summary>
-This userscript, LaTeX for Gmail, is an independent project and is not affiliated with, endorsed, sponsored, or supported by Google LLC, Alphabet Inc., or any of their subsidiaries. The aforementioned entities are not responsible for any issues, damages, or consequences arising from the use of this userscript. By using this userscript, you acknowledge that you are doing so at your own risk and agree to hold Google LLC, Alphabet Inc., and their respective affiliates harmless from any claims, losses, or damages arising from your use of this userscript.
-
-Google LLC reserves the right to request that the distribution of this userscript be ceased, or that the userscript or this Github repository be altered, if it violates Google's terms of service, policies, or guidelines, or if it causes harm to Google's reputation, user experience, or data privacy.
-
-The MIT license under which this userscript is distributed can be viewed [here](https://github.com/LoganJFisher/LaTeX-for-Gmail/blob/main/LICENSE).
-</details>
-
 ---
 Special thanks to the [KaTeX organization](https://katex.org/) - without which, this would not be possible.
