@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         6.1.0
+// @version         6.1.1
 // @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -291,34 +291,34 @@ function addStyles() {
         rel: "stylesheet",
         href: "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.css"
     });
-
+ 
     GM_addStyle(`
         .katex-display {
             max-width: 99%;
         }
-
+ 
         #\\:1 [role=list] > [role=listitem] {
             counter-reset: katexEqnNo;
         }
-
+ 
         #latex_toggle_message_button {
             cursor: pointer;
             margin: 0 16px 0 12px;
-            color: var(--gm3-sys-color-on-surface);
+            color: var(--darkreader-text--gm3-sys-color-on-surface, var(--gm3-sys-color-on-surface));
         }
-
+ 
         #latex_toggle_draft_button {
             user-select: none;
             width: 20px;
             height: 20px;
             margin: 4px 16px 4px -4px;
-            color: var(--gm3-sys-color-on-surface);
+            color: var(--darkreader-text--gm3-sys-color-on-surface, var(--gm3-sys-color-on-surface));
         }
-
+ 
         #latex_toggle_draft_button > .katex .base {
             display: flex;
         }
-
+ 
         #latex_draft_banner {
             visibility: hidden;
             background-color: rgb(255, 85, 85);
