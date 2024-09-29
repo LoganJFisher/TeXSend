@@ -38,25 +38,28 @@ Once you have a browser script manager extension installed on your browser:
 <details>
 <summary>:writing_hand: Use Guide:</summary>
 
-LaTeX code is compiled automatically upon opening an email or expanding an email in a chain. To toggle it off (or back on), click the $\TeX$ button on the action bar at the top of the email.
+LaTeX code is compiled automatically upon opening an email or expanding an email in a chain. To toggle it off (or back on), click the $\TeX$ button on the action bar at the top of the email. <br>
+$~~~~$:accessibility: `Ctrl+Alt+L` shortcut to toggle compiling in an email chain.
 
-$~~~~$:accessibility: Ctrl+Alt+L also works as a shortcut to toggle TeX compiling (only for sent & received emails, not drafts).
+LaTeX code is not compiled automatically in drafts, but can be toggled on by clicking the $\TeX$ button in the action bar at the bottom of the draft. Editing is disabled while compile is on. <br>
+$~~~~$:accessibility: `Ctrl+Alt+K` shortcut to toggle compiling in an active draft.
 
-[KaTeX-supported environments](https://katex.org/docs/support_table) (i.e. anything on their list which starts with `\begin`) (e.g. `\begin{bmatrix}` and `\begin{array}`) can be called at any place in an email. In addition to these, a set of additional delimiters have been added to allow you to create inline and display math environments with ease.
+[KaTeX-supported environments](https://katex.org/docs/support_table) (i.e. anything on their list which is surrounded with braces (curly brackets) `{}`) (e.g. `\begin{bmatrix}` and `\begin{array}`) can be used at any place in an email. In addition to these, a set of additional delimiters have been added to allow you to create inline and display math environments with ease.
 
-$~~~~$**Accepted math environment delimiters include:**
+$~~~~$**Additional supported math environment delimiters beyond KaTeX:**
 * Inline mode:
-  * `[; ... ;]` <!-- This is from "TeXTheWorld" and "Mathjax for Reddit" -->
+  * `[; ... ;]`
   * `\( ... \)`
   * `\begin{math} ... \end{math}`
 * Display mode:
-  * `[(; ... ;)]` <!-- This is from "TeXTheWorld" and "Mathjax for Reddit" -->
+  * `[(; ... ;)]`
   * `\[ ... \]`
   * `\begin{displaymath} ... \end{displaymath}`
-  * `\begin{equation} ... \end{equation}` — *Numerated*
 
 :bulb: Use `\displaystyle` inside inline delimiters to compile as display mode with line breaks. <br>
 $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
+
+Inside of a supported environment, you can use any of the many other functions provided by KaTeX (e.g. `\alpha` and `\brack`).
  
 ![Example of LaTeX for Gmail in action](https://i.imgur.com/zEIsQeL.png)
 </details>
@@ -72,7 +75,6 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
 * :bug: Bugs:
   * No known bugs at this time! :smile:
 * :gem: Features:
-  * Shortcut for drafts
   * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
     * Completely unrelated to KaTeX, but should be compatible.
     * TikZ uses `\begin{tikzpicture}` delimiters.
