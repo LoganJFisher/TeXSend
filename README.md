@@ -75,15 +75,15 @@ Inside of a supported environment, you can use any of the many other functions p
 * :bug: Bugs:
   * No known bugs at this time! :smile:
 * :gem: Features:
-  * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
-    * Completely unrelated to KaTeX, but should be compatible.
-    * TikZ uses `\begin{tikzpicture}` delimiters.
   * Add descriptive comments to the userscript to accomodate code reviews and user edits.
 * :knot: Stretch Goals:
   * Support for other popular email services (Outlook -> Thunderbird [w/ this add-on](https://addons.thunderbird.net/en-US/thunderbird/addon/userchromejs-2/) -> Protonmail -> Yahoo Mail -> AOL Mail).
     * Outlook as first priority.
     * Each email service would be an independent userscript, not all in one.
     * This repository would then be renamed.
+  * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
+    * Completely unrelated to KaTeX, but should be compatible.
+    * TikZ uses `\begin{tikzpicture}` delimiters.
   * Incorporate [LaTeX.js](https://latex.js.org/).
     * This was briefly toyed with, but only partial support with lots of issues was achieved.
       * It seems the ideal would be to still use KaTeX for math environments, and TikZJax for TikZ envionrments, but LaTeX.js would be useful for general formatting.
