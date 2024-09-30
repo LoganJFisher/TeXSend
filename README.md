@@ -82,7 +82,7 @@ Inside of a supported environment, you can use any of the many other functions p
   * Add descriptive comments to the userscript to accomodate code reviews and user edits.
 * :thought_balloon: Pipe Dreams:
   * Support for other popular email services (e.g. Outlook, Yahoo Mail, ProtonMail, AOL Mail, etc.).
-    * Request for Outlook at first priority.
+    * Request for Outlook as first priority.
     * Each email service would be an independent userscript, not all in one.
     * This repository would then be renamed.
   * Incorporate [LaTeX.js](https://latex.js.org/).
