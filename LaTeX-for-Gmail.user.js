@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         6.1.1
+// @version         6.1.2
 // @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -236,13 +236,10 @@ function attachSendListener(draft) {
 }
 
 function draftShortcutHandler(event) {
-    if (event.ctrlKey && event.altKey && event.keyCode === 75) { //L
+    if (event.ctrlKey && event.altKey && event.keyCode === 75) { // K
         toggleDraft(event.currentTarget);
-    }
-
-    if (!event.currentTarget.closest('div[role=dialog]')) return; // apply below shortcut to compose draft only (already exists for replies)
-
-    if (event.ctrlKey && event.altKey && event.keyCode === 76) { // K
+    } else if (event.ctrlKey && event.altKey && event.keyCode === 76) { // L
+        event.stopPropagation();
         toggleMessages();
     }
 }
@@ -340,7 +337,8 @@ function addStyles() {
 
 function init() {
     const config = {attributes: false, childList: true};
-    const observer = new MutationObserver( () => {
+    const observer = new MutationObserver( (mutations) => {
+        if (!mutations.some(m => m.addedNodes.length)) return;
         addMessageToggleButton();
         refreshMessages();
         observeMessages();
@@ -348,8 +346,10 @@ function init() {
     });
 
     let splitViewFound = false;
+    let attempts = 0;
     function observeSplitView() {
-        if (splitViewFound) return;
+        if (splitViewFound || attempts > 2) return;
+        attempts += 1;
         waitForElement(selectors.splitHalf).then( splitHalf => {
             observer.observe(splitHalf, config);
             splitViewFound = true;
@@ -359,12 +359,20 @@ function init() {
     waitForElement(selectors.topBar).then( topbar => observer.observe(topbar, config));
     observeSplitView();
 
-    waitForElement(selectors.draftsContainer).then(draftsContainer => {
-        const observer = new MutationObserver( () => {
-            processDrafts(draftsContainer);
-        });
-        observer.observe(draftsContainer, {childList: true});
+    const bodyObserver = new MutationObserver( () => {
+        const draftsContainer = document.querySelector(selectors.draftsContainer);
+        if (!draftsContainer) return;
+        bodyObserver.disconnect();
+
+        const _callback = () => processDrafts(draftsContainer);
+        const draftsObserver = new MutationObserver(_callback);
+        draftsObserver.observe(draftsContainer, {childList: true});
+
+        _callback();
     });
+
+    bodyObserver.observe(document.body, {attributes: true});
+
 }
 
 function main() {
