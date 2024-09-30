@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-## If you are requesting a LaTeX package, please see [here](https://github.com/LoganJFisher/LaTeX-for-Gmail/wiki/LaTeX-Package-Requests).
+## If you are requesting a LaTeX package, please see [here](https://github.com/LoganJFisher/TeXMail/wiki/LaTeX-Package-Requests).
 
 **Is your feature request related to a problem? Please describe.**
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
