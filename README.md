@@ -80,8 +80,8 @@ Inside of a supported environment, you can use any of the many other functions p
     * TikZ uses `\begin{tikzpicture}` delimiters.
   * Add descriptive comments to the userscript to accomodate code reviews and user edits.
 * :thought_balloon: Pipe Dreams:
-  * Support for other popular email services (e.g. Outlook, Yahoo Mail, ProtonMail, AOL Mail, etc.).
-    * Request for Outlook as first priority.
+  * Support for other popular email services (Outlook -> Thunderbird [w/ this add-on](https://addons.thunderbird.net/en-US/thunderbird/addon/userchromejs-2/) -> Protonmail -> Yahoo Mail -> AOL Mail).
+    * Outlook as first priority.
     * Each email service would be an independent userscript, not all in one.
     * This repository would then be renamed.
   * Incorporate [LaTeX.js](https://latex.js.org/).
