@@ -1,13 +1,13 @@
 // ==UserScript==
-// @name            LaTeX for Gmail
-// @version         6.1.3
+// @name            TeXMail - Gmail
+// @version         6.1.4
 // @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
 // @namespace       https://github.com/LoganJFisher/LaTeX-for-Gmail/
-// @downloadURL     https://raw.githubusercontent.com/LoganJFisher/LaTeX-for-Gmail/refs/heads/main/LaTeX-for-Gmail.user.js
-// @updateURL       https://raw.githubusercontent.com/LoganJFisher/LaTeX-for-Gmail/refs/heads/main/LaTeX-for-Gmail.user.js
-// @supportURL      https://github.com/LoganJFisher/LaTeX-for-Gmail/issues
+// @downloadURL     https://raw.githubusercontent.com/LoganJFisher/TeXMail/refs/heads/main/TeXMail-Gmail.user.js
+// @updateURL       https://raw.githubusercontent.com/LoganJFisher/TeXMail/refs/heads/main/TeXMail-Gmail.user.js
+// @supportURL      https://github.com/LoganJFisher/TeXMail/issues
 // @match           https://mail.google.com/mail/*
 // @noframes
 // @grant           GM_registerMenuCommand
