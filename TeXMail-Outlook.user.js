@@ -1,11 +1,11 @@
 // ==UserScript==
-// @name        LaTeX for Outlook
+// @name        TeXMail - Outlook
 // @namespace   Violentmonkey Scripts
 // @match       https://outlook.live.com/mail/*
 // @grant       GM_registerMenuCommand
 // @grant       GM_addElement
 // @require     https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js
-// @version     0.0.3
+// @version     0.0.4
 // @author      -
 // @description -
 // ==/UserScript==
