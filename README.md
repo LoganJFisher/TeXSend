@@ -84,7 +84,7 @@ Inside of a supported environment, you can use any of the many other functions p
   * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
     * Completely unrelated to KaTeX, but should be compatible.
     * TikZ uses `\begin{tikzpicture}` delimiters.
-  * Incorporate [LaTeX.js](https://latex.js.org/).
+  * Add [LaTeX.js](https://latex.js.org/) support.
     * This was briefly toyed with, but only partial support with lots of issues was achieved.
       * It seems the ideal would be to still use KaTeX for math environments, and TikZJax for TikZ envionrments, but LaTeX.js would be useful for general formatting.
 </details>
