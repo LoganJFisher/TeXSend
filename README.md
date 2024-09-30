@@ -82,7 +82,7 @@ Inside of a supported environment, you can use any of the many other functions p
     * Each email service would be an independent userscript, not all in one.
     * This repository would then be renamed.
   * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
-    * Completely unrelated to KaTeX, but should be compatible.
+    * [npmjs](https://www.npmjs.com/package/tikzjax/v/1.0.2?activeTab=code) - src folder currently missing tikzjax.js
     * TikZ uses `\begin{tikzpicture}` delimiters.
   * Add [LaTeX.js](https://latex.js.org/) support.
     * This was briefly toyed with, but only partial support with lots of issues was achieved.
