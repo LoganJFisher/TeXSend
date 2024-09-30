@@ -1,9 +1,9 @@
-# LaTeX for Gmail
+# TeXMail
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-----------------------------------------------------------------------------------HEADER----------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-This userscript adds "TeX" buttons to the action bars of open emails and drafts in Gmail. When clicked, this causes LaTeX code to toggle between compiled and text states.
+These userscripts adds "TeX" buttons to the action bars of open emails and drafts in your preferred email service (currently only Gmail). When clicked, this causes LaTeX code to toggle between compiled and text states.
 
 Everything that is on the [KaTeX Support Table](https://katex.org/docs/support_table) is supported by this userscript. That includes all standard equation elements, matrices, arrays, and lots more.
 
@@ -25,10 +25,12 @@ This requires the use of a browser script manager. Violentmonkey is recommended,
 * [Opera](https://github.com/OpenUserJs/OpenUserJS.org/wiki/Violentmonkey-for-Opera)
 * [Safari](https://apps.apple.com/us/app/meddlemonkey/id1539631953?mt=12)
 
-Once you have a browser script manager extension installed on your browser:
-* Click [this link](https://github.com/LoganJFisher/LaTeX-for-Gmail/raw/refs/heads/main/LaTeX-for-Gmail.user.js)
+Once you have a browser script manager extension installed on your browser, click the following link for your email service:
+* [Gmail](https://github.com/LoganJFisher/LaTeX-for-Gmail/raw/refs/heads/main/LaTeX-for-Gmail.user.js)
+
+Lastly,
 * On the new tab, click "Install" (on the left for Violentmonkey)
-* Refresh any open Gmail tabs
+* Refresh any open tabs for your email service
 </details>
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -61,7 +63,7 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
 
 Inside of a supported environment, you can use any of the many other functions provided by KaTeX (e.g. `\alpha` and `\brack`).
  
-![Example of LaTeX for Gmail in action](https://i.imgur.com/zEIsQeL.png)
+![Example of TeXMail in action (in Gmail)](https://i.imgur.com/zEIsQeL.png)
 </details>
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
