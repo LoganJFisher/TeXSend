@@ -44,7 +44,7 @@ $~~~~$:accessibility: `Ctrl+Alt+L` shortcut to toggle compiling in an email chai
 LaTeX code is not compiled automatically in drafts, but can be toggled on by clicking the $\TeX$ button in the action bar at the bottom of the draft. Editing is disabled while compile is on. <br>
 $~~~~$:accessibility: `Ctrl+Alt+K` shortcut to toggle compiling in an active draft.
 
-[KaTeX-supported environments](https://katex.org/docs/support_table) (i.e. anything on their list which is surrounded with braces (curly brackets) `{}`) (e.g. `\begin{bmatrix}` and `\begin{array}`) can be used at any place in an email. In addition to these, a set of additional delimiters have been added to allow you to create inline and display math environments with ease.
+[KaTeX-supported environments](https://katex.org/docs/support_table) (i.e. anything on their list which is surrounded with braces `{}`) (e.g. `\begin{bmatrix}` and `\begin{array}`) can be used at any place in an email. In addition to these, a set of additional delimiters have been added to allow you to create inline and display math environments with ease.
 
 $~~~~$**Additional supported math environment delimiters beyond KaTeX:**
 * Inline mode:
@@ -78,7 +78,6 @@ Inside of a supported environment, you can use any of the many other functions p
   * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
     * Completely unrelated to KaTeX, but should be compatible.
     * TikZ uses `\begin{tikzpicture}` delimiters.
-  * Change equation enumeration to maintain a count throughout emails in a chain, keeping track even when minimized.
   * Add descriptive comments to the userscript to accomodate code reviews and user edits.
 * :thought_balloon: Pipe Dreams:
   * Support for other popular email services (e.g. Outlook, Yahoo Mail, ProtonMail, AOL Mail, etc.).
@@ -87,7 +86,7 @@ Inside of a supported environment, you can use any of the many other functions p
     * This repository would then be renamed.
   * Incorporate [LaTeX.js](https://latex.js.org/).
     * This was briefly toyed with, but only partial support with lots of issues was achieved.
-      * It seems the ideal would be to still use KaTeX for math environments, and TikZJax for TikZ envionrments, but LaTeX.js would be useful for general document formatting.
+      * It seems the ideal would be to still use KaTeX for math environments, and TikZJax for TikZ envionrments, but LaTeX.js would be useful for general formatting.
 </details>
 
 ---
