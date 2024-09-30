@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name            TeXMail - Gmail
-// @version         6.1.4
+// @version         6.1.5
 // @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
 // @namespace       https://github.com/LoganJFisher/LaTeX-for-Gmail/
-// @downloadURL     https://raw.githubusercontent.com/LoganJFisher/TeXMail/refs/heads/main/TeXMail-Gmail.user.js
-// @updateURL       https://raw.githubusercontent.com/LoganJFisher/TeXMail/refs/heads/main/TeXMail-Gmail.user.js
-// @supportURL      https://github.com/LoganJFisher/TeXMail/issues
+// @downloadURL     https://raw.githubusercontent.com/LoganJFisher/LaTeX-for-Gmail/refs/heads/main/LaTeX-for-Gmail.user.js
+// @updateURL       https://raw.githubusercontent.com/LoganJFisher/LaTeX-for-Gmail/refs/heads/main/LaTeX-for-Gmail.user.js
+// @supportURL      https://github.com/LoganJFisher/LaTeX-for-Gmail/issues
 // @match           https://mail.google.com/mail/*
 // @noframes
 // @grant           GM_registerMenuCommand
@@ -20,6 +20,11 @@
 
 /* globals katex */
 
+/* globals katex */
+
+// ===================================================================================================
+// Constants
+// ===================================================================================================
 const selectors = {
     topBar: 'div#\\:4',
     moveButton: 'div#\\:4 div[title="Move to"], div#\\:1 div[aria-label="Move to"]',
@@ -75,10 +80,20 @@ const DELIMITERS = [
     {left: '\\begin{vmatrix*}' , right: '\\end{vmatrix*}', display: true, includeDelimiter: true},
 ]
 
+// ===================================================================================================
+// Latex
+// ===================================================================================================
+
 const REGEX = buildRegex(DELIMITERS);
 
+/*
+Build one BIG regex from all the delimiters. (using disjunction `|` aka OR)
+`tex` & `d` are named capture groups
+depending on `includeDelimiter` tex will either include the delimiters or only what's between them: tex = (left...right) or left(...)right
+depending on `display`; an empty capture group `d` is added at the end to indicate display(displayMode) for that particular delimiter pair.
+*/
 function buildRegex(delims) {
-    const escape = string => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const escape = string => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // escapes the special characters in the delimiters.
     const expressions = delims.map( d => {
         const display = d.display ? '(?<d>)' : '';
         const exp = d.includeDelimiter ? `(?<tex>${escape(d.left)}.+?${escape(d.right)})${display}` : `${escape(d.left)}(?<tex>.+?)${escape(d.right)}${display}`;
@@ -88,20 +103,25 @@ function buildRegex(delims) {
     return new RegExp(expressions.join('|'), 'gs');
 }
 
+
 function renderLatex(html) {
     html = html.replace(/<wbr>/gs, '').replace(/&nbsp;/gs, ' '); // fixes parsing of long expressions (GMAIL inserts <wbr> tags for some reason) & removes white spaces after delimiters
     const div = document.createElement('div');
 
     html = html.replace(REGEX, function() {
-        const groups = arguments[arguments.length - 1];
-        const display = groups.d !== undefined;
-        div.innerHTML = groups.tex;
+        const groups = arguments[arguments.length - 1]; // get last argument (named groups)
+        const display = groups.d !== undefined; // diplay will be true if the match includes `d` (the empty group)
+        div.innerHTML = groups.tex; // use div.textContent to get cleaned up string (tried manual replacement but it was buggy, this works best for now)
         return katex.renderToString(div.textContent, {throwOnError: false, displayMode: display, trust: true, strict: false})
     })
 
     return html;
 }
 
+/*
+takes a list of html elements and swaps their innerHTML between the stored `oldHTML` and rendered LaTeX depending on `state`
+this is meant to work for both messages & drafts, so NO caching of the rendered LaTeX is done.
+*/
 function updateLatex(messageList, state) {
     messageList.forEach(message => {
         if (state === message.rendered) return;
@@ -123,6 +143,10 @@ function updateLatex(messageList, state) {
 
 let MESSAGES_TOGGLE = true;
 
+/*
+Adds the toggle button next to the `Move to` button
+copy the classes/structure of native buttons to avoid the many styling issues (compatibility with different themes & darkreader)
+*/
 function addMessageToggleButton() {
     const moveBtn = document.querySelector(selectors.moveButton);
     if (!moveBtn || moveBtn.parentElement.processed) return;
@@ -147,7 +171,11 @@ function addMessageToggleButton() {
     parent.processed = true;
 }
 
-
+/*
+ calls refreshMessages() & processDrafts() everytime a message is expanded/reply is added
+ `itemObserver` watches changes in the attributes `aria-expanded` (when a message is expanded) & class (changes when a reply draft to that message is opened)
+ `listObserver` watches new replies/messages in the chain and applies `itemObserver` to them.
+*/
 function observeMessages() {
     const messageList = document.querySelector(selectors.messageList);
     if (!messageList) return;
@@ -168,11 +196,13 @@ function observeMessages() {
     _observe();
 }
 
+// simply calls updateLatex with the message list
 function refreshMessages() {
     const list = document.querySelectorAll(selectors.messageBody);
     updateLatex(list, MESSAGES_TOGGLE);
 }
 
+// toggles/switches the `MESSAGES_TOGGLE` and refreshes the messages
 function toggleMessages() {
     MESSAGES_TOGGLE = !MESSAGES_TOGGLE;
     refreshMessages();
@@ -182,10 +212,12 @@ function toggleMessages() {
 // DRAFTS
 // ===================================================================================================
 
+
+// Goes through all the drafts (compose or reply) and adds the TeX button and the banner to each.
 function processDrafts(container) {
     const drafts = container.querySelectorAll(selectors.draftRegion);
     drafts.forEach( draft => {
-        if (draft.processed) return;
+        if (draft.processed) return; // make sure we don't process the same draft multiple times
         addDraftToggleButton(draft);
         addBanner(draft);
         attachSendListener(draft);
@@ -193,13 +225,14 @@ function processDrafts(container) {
     })
 }
 
+// simply toggle the give draft
 function toggleDraft(draft) {
     const draftBody = draft.querySelector(selectors.draftBody);
     updateLatex([draftBody], !draftBody.rendered)
-    draftBody.setAttribute('contenteditable', !draftBody.rendered);
-    draft.bannerDiv.style.visibility = draftBody.rendered ? 'visible': 'hidden';
-    draft.bannerDiv.style.marginBottom = draftBody.rendered ? '0px': '-30px';
+    draftBody.setAttribute('contenteditable', !draftBody.rendered); // disable/enable editing based on latex toggle
+    draft.bannerDiv.style.display = draftBody.rendered ? 'flex': 'none'; // hide/show the banner
 }
+
 
 function addDraftToggleButton(draft) {
     const buttonContainer = draft.querySelector(selectors.lockerButton);
@@ -224,10 +257,11 @@ function addBanner(draft) {
         id: 'latex_draft_banner',
     });
 
-    parent.insertBefore(bannerDiv, parent.children[parent.children.length - 1]);
+    parent.insertBefore(bannerDiv, parent.children[parent.children.length - 1]); // insert the banner under `Subject`
     draft.bannerDiv = bannerDiv;
 }
 
+// makes sure we send the raw draft (not rendered latex) when the send button is clicked
 function attachSendListener(draft) {
     const draftBody = draft.querySelector(selectors.draftBody);
     const sendButton = draft.querySelector(selectors.sendButton);
@@ -235,11 +269,13 @@ function attachSendListener(draft) {
     sendButton.addEventListener('click', () => updateLatex([draftBody], false), true);
 }
 
+// adds shortcuts within the draft
+// keyCodes 75 = K, 76 = L
 function draftShortcutHandler(event) {
-    if (event.ctrlKey && event.altKey && event.keyCode === 75) { // K
+    if (event.ctrlKey && event.altKey && event.keyCode === 75) {
         toggleDraft(event.currentTarget);
-    } else if (event.ctrlKey && event.altKey && event.keyCode === 76) { // L
-        event.stopPropagation();
+    } else if (event.ctrlKey && event.altKey && event.keyCode === 76) { //this listener is only for compose drafts since they don't bubble events
+        event.stopPropagation(); // reply drafts bubble the events, this avoids a double call to `toggleMessages`
         toggleMessages();
     }
 }
@@ -265,7 +301,11 @@ function waitForElement(queryString, interval=100, maxTries=100) {
     return new Promise(findElement);
 }
 
-
+/*
+gets the 'empty' row under formatting and replaces it with 2 rows (toggle messages & toggle drafts)
+Used xpath because there isn't a reliable css selector for the `Formatting` section of the shortcuts table/menu
+Used waitForElement because we need to insert the new shortcuts everytime the menu is opened (the table is restored everytime it is opened for some reason)
+*/
 function addShortcuts() {
     const xpath = '//tr[th/text()="Formatting"]/following-sibling::tr';
     const msg_ShortcutHTML = '<tr><td class="wg Dn"><span class="wh">Ctrl</span> <span class="wb">+</span> <span class="wh">Alt</span> <span class="wb">+</span> <span class="wh">L</span> :</td><td class="we Dn">Toggle LaTeX (inbox)</td></tr>';
@@ -317,16 +357,15 @@ function addStyles() {
         }
 
         #latex_draft_banner {
-            visibility: hidden;
             background-color: rgb(255, 85, 85);
             color: white;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             padding: 5px 50px;
             position: sticky;
             bottom: 0;
-            margin-bottom: -30px;
+
         }
     `);
 }
@@ -338,13 +377,14 @@ function addStyles() {
 function init() {
     const config = {attributes: false, childList: true};
     const observer = new MutationObserver( (mutations) => {
-        if (!mutations.some(m => m.addedNodes.length)) return;
+        if (!mutations.some(m => m.addedNodes.length)) return; // proceed only if new messages have been added.
         addMessageToggleButton();
         refreshMessages();
         observeMessages();
         observeSplitView();
     });
 
+    // try to find the split view (if not found it's probably disabled)
     let splitViewFound = false;
     let attempts = 0;
     function observeSplitView() {
@@ -356,9 +396,12 @@ function init() {
         });
     }
 
+    // the topbar is an element that will mutate everytime a new email is opened (when not in split mode)
     waitForElement(selectors.topBar).then( topbar => observer.observe(topbar, config));
     observeSplitView();
 
+    // observe the body until the compose container appears (all compose drafts are children of this container)
+    // once it does we can observe it specifically for new compose drafts
     const bodyObserver = new MutationObserver( () => {
         const draftsContainer = document.querySelector(selectors.draftsContainer);
         if (!draftsContainer) return;
@@ -376,6 +419,7 @@ function init() {
 }
 
 function main() {
+    // allows modifying the html on gmail
     if (window.trustedTypes && window.trustedTypes.createPolicy && !window.trustedTypes.defaultPolicy) {
         window.trustedTypes.createPolicy('default', {
             createHTML: string => string
@@ -391,7 +435,7 @@ function main() {
 main();
 
 // Legal:
-// This userscript, LaTeX for Gmail, is an independent project and is not affiliated with, endorsed, sponsored, or supported by Google LLC, Alphabet Inc., or any of their subsidiaries. The aforementioned entities are not responsible for any issues, damages, or consequences arising from the use of this userscript.
+// This userscript, TeXMail - Gmail, is an independent project and is not affiliated with, endorsed, sponsored, or supported by Google LLC, Alphabet Inc., or any of their subsidiaries. The aforementioned entities are not responsible for any issues, damages, or consequences arising from the use of this userscript.
 // By using this userscript, you acknowledge that you are doing so at your own risk and agree to hold Google LLC, Alphabet Inc., and their respective affiliates harmless from any claims, losses, or damages arising from your use of this userscript.
 // Google LLC reserves the right to request that the distribution of this userscript be ceased, or that the userscript be altered, if it violates Google's terms of service, policies, or guidelines, or if it causes harm to Google's reputation, user experience, or data privacy.
-// The MIT license under which this userscript is distributed can be viewed [here](https://github.com/LoganJFisher/LaTeX-for-Gmail/blob/main/LICENSE).
+// The MIT license under which this userscript is distributed can be viewed [here](https://github.com/LoganJFisher/TeXMail?tab=MIT-1-ov-file).
