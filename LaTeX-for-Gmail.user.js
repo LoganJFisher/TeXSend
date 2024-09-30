@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LaTeX for Gmail
-// @version         6.1.2
+// @version         6.1.3
 // @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -22,7 +22,7 @@
 
 const selectors = {
     topBar: 'div#\\:4',
-    moveButton: 'div#\\:4 div[title="Move to"], div[aria-label="Move to"]',
+    moveButton: 'div#\\:4 div[title="Move to"], div#\\:1 div[aria-label="Move to"]',
     messageList: '#\\:1 div[role=list]',
     messageBody: '#\\:1 [role=list] > [role=listitem] [data-message-id] > div > div > div[id^=":"][jslog]',
     draftsContainer: 'body > div.dw > div > div > div > div:first-child',
@@ -288,22 +288,22 @@ function addStyles() {
         rel: "stylesheet",
         href: "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.css"
     });
- 
+
     GM_addStyle(`
         .katex-display {
             max-width: 99%;
         }
- 
+
         #\\:1 [role=list] > [role=listitem] {
             counter-reset: katexEqnNo;
         }
- 
+
         #latex_toggle_message_button {
             cursor: pointer;
             margin: 0 16px 0 12px;
             color: var(--darkreader-text--gm3-sys-color-on-surface, var(--gm3-sys-color-on-surface));
         }
- 
+
         #latex_toggle_draft_button {
             user-select: none;
             width: 20px;
@@ -311,11 +311,11 @@ function addStyles() {
             margin: 4px 16px 4px -4px;
             color: var(--darkreader-text--gm3-sys-color-on-surface, var(--gm3-sys-color-on-surface));
         }
- 
+
         #latex_toggle_draft_button > .katex .base {
             display: flex;
         }
- 
+
         #latex_draft_banner {
             visibility: hidden;
             background-color: rgb(255, 85, 85);
