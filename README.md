@@ -79,7 +79,7 @@ Inside of a supported environment, you can use any of the many other functions p
     * Completely unrelated to KaTeX, but should be compatible.
     * TikZ uses `\begin{tikzpicture}` delimiters.
   * Add descriptive comments to the userscript to accomodate code reviews and user edits.
-* :thought_balloon: Pipe Dreams:
+* :knot: Stretch Goals:
   * Support for other popular email services (Outlook -> Thunderbird [w/ this add-on](https://addons.thunderbird.net/en-US/thunderbird/addon/userchromejs-2/) -> Protonmail -> Yahoo Mail -> AOL Mail).
     * Outlook as first priority.
     * Each email service would be an independent userscript, not all in one.
