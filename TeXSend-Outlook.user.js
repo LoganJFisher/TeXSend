@@ -1,13 +1,21 @@
 // ==UserScript==
-// @name        TeXSend - Outlook
-// @namespace   Violentmonkey Scripts
-// @match       https://outlook.live.com/mail/*
-// @grant       GM_registerMenuCommand
-// @grant       GM_addElement
-// @require     https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js
-// @version     0.0.4
-// @author      -
-// @description -
+// @name            TeXSend - Outlook
+// @version         0.0.5
+// @description     LaTeX compiling for Outlook
+// @author          Logan J. Fisher & GTK & MistralMireille
+// @license         MIT
+// @namespace       https://github.com/LoganJFisher/TeXSend/
+// @downloadURL     https://raw.githubusercontent.com/LoganJFisher/TeXSend/refs/heads/main/TeXSend-Outlook.user.js
+// @updateURL       https://raw.githubusercontent.com/LoganJFisher/TeXSend/refs/heads/main/TeXSend-Outlook.user.js
+// @supportURL      https://github.com/LoganJFisher/TeXSend/issues
+// @match           https://outlook.live.com/mail/*
+// @noframes
+// @grant           GM_registerMenuCommand
+// @grant           GM_addElement
+// @grant           GM_addStyle
+// @require         https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js
+// @require         https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/mhchem.min.js
+// @require         https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js
 // ==/UserScript==
 
 /* globals katex */
