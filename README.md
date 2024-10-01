@@ -5,16 +5,21 @@
   </picture>
 </h1>
 
+![Services](https://img.shields.io/badge/Services-1-blue)
+![License](https://img.shields.io/badge/License-MIT-blue)
+[![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/LoganJFisher/TeXSend/pulls)
+[![Discussions](https://img.shields.io/badge/Discussions-join-brightgreen)](https://github.com/LoganJFisher/TeXSend/discussions)
+
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-----------------------------------------------------------------------------------HEADER----------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-This is a suite of userscripts which add "TeX" buttons to the action bars of open emails and drafts in your preferred email service (currently only Gmail). When clicked, this causes LaTeX code to toggle between compiled and text states.
+TeXSend is a suite of userscripts which allow you to compile LaTeX code in your preferred email service (currently only Gmail).
 
 Everything that is on the [KaTeX Support Table](https://katex.org/docs/support_table) is supported by this userscript. That includes all standard equation elements, matrices, arrays, and lots more.
 
 > [!IMPORTANT]
 > * This does not change the content of emails in any way. Email recipients will also need to run this userscript to compile on their end.<br>
-> * The compiling is performed entirely locally - the content of emails is not transmitted to any server by this userscript.
+> * The compiling is performed entirely locally - the content of emails is not transmitted to any server.
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-----------------------------------------------------------------------------INSTALLATION GUIDE----------------------------------------------------------------------------->
