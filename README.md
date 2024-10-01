@@ -31,7 +31,7 @@ This requires the use of a browser script manager. Violentmonkey is recommended,
 * [Safari](https://apps.apple.com/us/app/meddlemonkey/id1539631953?mt=12)
 
 Once you have a browser script manager extension installed on your browser, click the following link for your email service:
-* [Gmail](https://github.com/LoganJFisher/LaTeX-for-Gmail/raw/refs/heads/main/LaTeX-for-Gmail.user.js)
+* [Gmail](https://github.com/LoganJFisher/TeXSend/raw/refs/heads/main/TeXSend-Gmail.user.js)
 
 Lastly,
 * On the new tab, click "Install" (on the left for Violentmonkey)
