@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        TeXMail - Outlook
+// @name        TeXSend - Outlook
 // @namespace   Violentmonkey Scripts
 // @match       https://outlook.live.com/mail/*
 // @grant       GM_registerMenuCommand
