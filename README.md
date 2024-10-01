@@ -8,7 +8,7 @@
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-----------------------------------------------------------------------------------HEADER----------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-These userscripts adds "TeX" buttons to the action bars of open emails and drafts in your preferred email service (currently only Gmail). When clicked, this causes LaTeX code to toggle between compiled and text states.
+This is a suite of userscripts which add "TeX" buttons to the action bars of open emails and drafts in your preferred email service (currently only Gmail). When clicked, this causes LaTeX code to toggle between compiled and text states.
 
 Everything that is on the [KaTeX Support Table](https://katex.org/docs/support_table) is supported by this userscript. That includes all standard equation elements, matrices, arrays, and lots more.
 
@@ -68,7 +68,7 @@ $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
 
 Inside of a supported environment, you can use any of the many other functions provided by KaTeX (e.g. `\alpha` and `\brack`).
  
-![Example of TeXMail in action (in Gmail)](https://i.imgur.com/zEIsQeL.png)
+![Example of TeXSend in action (in Gmail)](https://i.imgur.com/zEIsQeL.png)
 </details>
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
