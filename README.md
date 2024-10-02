@@ -21,10 +21,10 @@
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 TeXSend is a suite of userscripts which allow you to compile LaTeX code in your favorite email services.
 
-Everything that is on the [KaTeX Support Table](https://katex.org/docs/support_table) is supported by this userscript. That includes all standard equation elements, matrices, arrays, and lots more.
+Everything that is on the [KaTeX Support Table](https://katex.org/docs/support_table) is supported by these userscripts. That includes all standard equation elements, matrices, arrays, and lots more.
 
 > [!IMPORTANT]
-> * This does not change the content of emails in any way. Email recipients will also need to run this userscript to compile on their end.<br>
+> * This does not change the content of emails in any way. Email recipients will also need to run a userscript from this suite to compile on their end.<br>
 > * The compiling is performed entirely locally - the content of emails is not transmitted to any server.
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
