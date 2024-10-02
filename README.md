@@ -7,11 +7,11 @@
 
 [![Gmail](https://img.shields.io/badge/Gmail-✔-deepgreen)](https://github.com/LoganJFisher/TeXSend/raw/refs/heads/main/TeXSend-Gmail.user.js)
 [![Outlook](https://img.shields.io/badge/Outlook-⚙-7A6004)](https://github.com/LoganJFisher/TeXSend/raw/refs/heads/main/TeXSend-Outlook.user.js)
-![iCloud](https://img.shields.io/badge/iCloud-📆-darkred)
-![Thunderbird](https://img.shields.io/badge/Thunderbird-📆-darkred)
-![Protonmail](https://img.shields.io/badge/Protonmail-📆-darkred)
-![Yahoo](https://img.shields.io/badge/Yahoo-📆-darkred)
-![AOL](https://img.shields.io/badge/AOL-📆-darkred)<br>
+![iCloud](https://img.shields.io/badge/iCloud-✘-darkred)
+![Thunderbird](https://img.shields.io/badge/Thunderbird-✘-darkred)
+![Protonmail](https://img.shields.io/badge/Protonmail-✘-darkred)
+![Yahoo](https://img.shields.io/badge/Yahoo-✘-darkred)
+![AOL](https://img.shields.io/badge/AOL-✘-darkred)<br>
 [![License](https://img.shields.io/badge/License-MIT-purple)](https://github.com/LoganJFisher/TeXSend/blob/main/LICENSE)
 [![PRs](https://img.shields.io/badge/PRs-welcome-blue)](https://github.com/LoganJFisher/TeXSend/pulls)
 [![Discussions](https://img.shields.io/badge/Discussions-join-blue)](https://github.com/LoganJFisher/TeXSend/discussions)
