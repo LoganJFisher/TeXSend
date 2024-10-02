@@ -5,10 +5,16 @@
   </picture>
 </h1>
 
-![Services](https://img.shields.io/badge/Services-1-blue)
-![License](https://img.shields.io/badge/License-MIT-blue)
-[![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/LoganJFisher/TeXSend/pulls)
-[![Discussions](https://img.shields.io/badge/Discussions-join-brightgreen)](https://github.com/LoganJFisher/TeXSend/discussions)
+[![Gmail](https://img.shields.io/badge/Gmail-✔-deepgreen)](https://github.com/LoganJFisher/TeXSend/raw/refs/heads/main/TeXSend-Gmail.user.js)
+[![Outlook](https://img.shields.io/badge/Outlook-⚙-7A6004)](https://github.com/LoganJFisher/TeXSend/raw/refs/heads/main/TeXSend-Outlook.user.js)
+![iCloud](https://img.shields.io/badge/iCloud-📆-darkred)
+![Thunderbird](https://img.shields.io/badge/Thunderbird-📆-darkred)
+![Protonmail](https://img.shields.io/badge/Protonmail-📆-darkred)
+![Yahoo](https://img.shields.io/badge/Yahoo-📆-darkred)
+![AOL](https://img.shields.io/badge/AOL-📆-darkred)<br>
+[![License](https://img.shields.io/badge/License-MIT-purple)](https://github.com/LoganJFisher/TeXSend/blob/main/LICENSE)
+[![PRs](https://img.shields.io/badge/PRs-welcome-blue)](https://github.com/LoganJFisher/TeXSend/pulls)
+[![Discussions](https://img.shields.io/badge/Discussions-join-blue)](https://github.com/LoganJFisher/TeXSend/discussions)
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-----------------------------------------------------------------------------------HEADER----------------------------------------------------------------------------------->
@@ -87,7 +93,7 @@ Inside of a supported environment, you can use any of the many other functions p
 * :bug: Bugs:
   * No known bugs at this time! :smile:
 * :gem: Features:
-  * Support for other popular email services (Outlook -> Thunderbird [w/ this add-on](https://addons.thunderbird.net/en-US/thunderbird/addon/userchromejs-2/) -> Protonmail -> Yahoo Mail -> AOL Mail).
+  * Support for other popular email services (Outlook -> iCloud -> Thunderbird [w/ this add-on](https://addons.thunderbird.net/en-US/thunderbird/addon/userchromejs-2/) -> Protonmail -> Yahoo Mail -> AOL Mail).
     * Outlook as first priority.
     * Each email service would be an independent userscript, not all in one.
   * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
