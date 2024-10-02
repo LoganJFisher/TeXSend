@@ -19,7 +19,7 @@
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-----------------------------------------------------------------------------------HEADER----------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-TeXSend is a suite of userscripts which allow you to compile LaTeX code in your preferred email service (currently only Gmail).
+TeXSend is a suite of userscripts which allow you to compile LaTeX code in your favorite email services.
 
 Everything that is on the [KaTeX Support Table](https://katex.org/docs/support_table) is supported by this userscript. That includes all standard equation elements, matrices, arrays, and lots more.
 
@@ -96,10 +96,10 @@ Inside of a supported environment, you can use any of the many other functions p
   * Support for other popular email services (Outlook -> iCloud -> Thunderbird [w/ this add-on](https://addons.thunderbird.net/en-US/thunderbird/addon/userchromejs-2/) -> Protonmail -> Yahoo Mail -> AOL Mail).
     * Outlook as first priority.
     * Each email service would be an independent userscript, not all in one.
+* :knot: Stretch Goals:
   * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
     * [npmjs](https://www.npmjs.com/package/tikzjax/v/1.0.2?activeTab=code) - src folder currently missing tikzjax.js
     * TikZ uses `\begin{tikzpicture}` delimiters.
-* :knot: Stretch Goals:
   * Add [LaTeX.js](https://latex.js.org/) support.
     * This was briefly toyed with, but only partial support with lots of issues was achieved.
       * It seems the ideal would be to still use KaTeX for math environments, and TikZJax for TikZ envionrments, but LaTeX.js would be useful for general formatting.
