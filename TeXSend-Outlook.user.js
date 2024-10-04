@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name            TeXSend - Outlook
-// @version         0.0.5
+// @name            TeXSend-Outlook
+// @version         0.0.6
 // @description     LaTeX compiling for Outlook
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -8,7 +8,7 @@
 // @downloadURL     https://raw.githubusercontent.com/LoganJFisher/TeXSend/refs/heads/main/TeXSend-Outlook.user.js
 // @updateURL       https://raw.githubusercontent.com/LoganJFisher/TeXSend/refs/heads/main/TeXSend-Outlook.user.js
 // @supportURL      https://github.com/LoganJFisher/TeXSend/issues
-// @match           https://outlook.live.com/mail/*
+// @match           *://outlook.live.com/mail/*
 // @noframes
 // @grant           GM_registerMenuCommand
 // @grant           GM_addElement
