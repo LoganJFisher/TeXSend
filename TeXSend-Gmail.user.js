@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            TeXSend-Gmail
-// @version         6.1.11
+// @version         6.1.12
 // @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -25,15 +25,16 @@
 // ===================================================================================================
 const selectors = {
     topBar: 'div#\\:4',
-    moveButton: 'div#\\:4 div[title="Move to"], div#\\:1 div[aria-label="Move to"]',
+    moveButton: 'div#\\:4 div[title^="Move to"], div[role=main] div[aria-label^="Move to"]',
     messageList: '#\\:1 div[role=list]',
     messageBody: '#\\:1 [role=list] > [role=listitem] [data-message-id] > div > div > div[id^=":"][jslog]',
     draftsContainer: 'body > div.dw > div > div > div > div:first-child',
     draftRegion: 'div[role=region]',
     draftBody: 'div[aria-label="Message Body"]',
+    draftButtonContainer: 'td:has(> div > div[command=locker])',
     sendButton: 'div[role=button][aria-label^=Send]',
-    lockerButton: 'td:has(> div > div[command=locker])',
-    splitHalf: 'div[jsname=h50Ewe] > div > div > div > div',
+    splitViewContainer: '#\\:1 > div',
+    splitView: 'div[jsname=h50Ewe] > div > div > div > div',
     shortcutMenu: 'body > div.wa:not(.aou) > div[role=alert]',
 }
 
@@ -88,7 +89,7 @@ const REGEX = buildRegex(DELIMITERS);
 Build one BIG regex from all the delimiters. (using disjunction `|` aka OR)
 `tex` & `d` are named capture groups
 depending on `includeDelimiter` tex will either include the delimiters or only what's between them: tex = (left...right) or left(...)right
-depending on `display`; an empty capture group `d` is added at the end to indicate display(displayMode) for that particular delimiter pair.
+depending on `display` an empty capture group `d` is added at the end to indicate display(displayMode) for that particular delimiter pair.
 */
 function buildRegex(delims) {
     const escape = string => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // escapes the special characters in the delimiters.
@@ -103,13 +104,13 @@ function buildRegex(delims) {
 
 
 function renderLatex(html) {
-    html = html.replace(/<wbr>/gs, '').replace(/&nbsp;/gs, ' '); // fixes parsing of long expressions (GMAIL inserts <wbr> tags for some reason) & removes white spaces after delimiters
+    html = html.replace(/<wbr>/gs, ''); // fixes parsing of long expressions (GMAIL inserts <wbr> tags for some reason)
     const div = document.createElement('div');
 
     html = html.replace(REGEX, function() {
         const groups = arguments[arguments.length - 1]; // get last argument (named groups)
         const display = groups.d !== undefined; // diplay will be true if the match includes `d` (the empty group)
-        div.innerHTML = groups.tex; // use div.textContent to get cleaned up string (tried manual replacement but it was buggy, this works best for now)
+        div.innerHTML = groups.tex.replace(/&nbsp;/gs, '').trim();
         return katex.renderToString(div.textContent, {throwOnError: false, displayMode: display, trust: true, strict: false})
     })
 
@@ -223,17 +224,18 @@ function processDrafts(container) {
     })
 }
 
-// simply toggle the give draft
-function toggleDraft(draft) {
+// simply set the given draft to the given state (toggle if state=null)
+function toggleDraft(draft, state=null) {
     const draftBody = draft.querySelector(selectors.draftBody);
-    updateLatex([draftBody], !draftBody.rendered)
-    draftBody.setAttribute('contenteditable', !draftBody.rendered); // disable/enable editing based on latex toggle
-    draft.bannerDiv.style.display = draftBody.rendered ? 'flex': 'none'; // hide/show the banner
+    state = state !== null ? state : !draftBody.rendered;
+    updateLatex([draftBody], state)
+    draftBody.setAttribute('contenteditable', !state); // disable/enable editing based on latex toggle
+    draft.bannerDiv.style.display = state ? '': 'none'; // hide/show the banner
 }
 
 
 function addDraftToggleButton(draft) {
-    const buttonContainer = draft.querySelector(selectors.lockerButton);
+    const buttonContainer = draft.querySelector(selectors.draftButtonContainer);
     if (!buttonContainer) return;
     const button = GM_addElement(buttonContainer, 'div', {
         id: 'latex_toggle_draft_button',
@@ -245,7 +247,7 @@ function addDraftToggleButton(draft) {
     button.innerHTML = katex.renderToString('\\footnotesize \\TeX', {throwOnError: false});
 
     button.addEventListener('click', () => toggleDraft(draft));
-    draft.addEventListener('keydown', draftShortcutHandler);
+    draft.addEventListener('keydown', draftShortcutHandler, true);
 }
 
 function addBanner(draft) {
@@ -253,6 +255,7 @@ function addBanner(draft) {
     const bannerDiv = GM_addElement(document.body, 'div', {
         textContent: 'Disable LaTeX to edit draft',
         id: 'latex_draft_banner',
+        style: 'display: none;',
     });
 
     parent.insertBefore(bannerDiv, parent.children[parent.children.length - 1]); // insert the banner under `Subject`
@@ -261,20 +264,20 @@ function addBanner(draft) {
 
 // makes sure we send the raw draft (not rendered latex) when the send button is clicked
 function attachSendListener(draft) {
-    const draftBody = draft.querySelector(selectors.draftBody);
     const sendButton = draft.querySelector(selectors.sendButton);
-
-    sendButton.addEventListener('click', () => updateLatex([draftBody], false), true);
+    sendButton.addEventListener('click', () => toggleDraft(draft, false), true);
 }
 
 // adds shortcuts within the draft
-// keyCodes 75 = K, 76 = L
+// keyCodes 75 = K, 76 = L, 13 = Enter
 function draftShortcutHandler(event) {
     if (event.ctrlKey && event.altKey && event.keyCode === 75) {
         toggleDraft(event.currentTarget);
     } else if (event.ctrlKey && event.altKey && event.keyCode === 76) { //this listener is only for compose drafts since they don't bubble events
         event.stopPropagation(); // reply drafts bubble the events, this avoids a double call to `toggleMessages`
         toggleMessages();
+    } else if (event.ctrlKey && event.keyCode === 13) { // ctrl + enter is the draft send shortcut
+       toggleDraft(event.currentTarget, false);
     }
 }
 
@@ -337,7 +340,7 @@ function addStyles() {
         }
 
         #latex_toggle_message_button {
-            cursor: pointer;
+            user-select: none;
             margin: 0 16px 0 12px;
             color: var(--darkreader-text--gm3-sys-color-on-surface, var(--gm3-sys-color-on-surface));
         }
@@ -355,15 +358,15 @@ function addStyles() {
         }
 
         #latex_draft_banner {
+            user-select: none;
             background-color: rgb(255, 85, 85);
             color: white;
-            display: none;
+            display: flex;
             align-items: center;
             justify-content: center;
             padding: 5px 50px;
             position: sticky;
             bottom: 0;
-
         }
     `);
 }
@@ -379,24 +382,17 @@ function init() {
         addMessageToggleButton();
         refreshMessages();
         observeMessages();
-        observeSplitView();
     });
 
     // try to find the split view (if not found it's probably disabled)
-    let splitViewFound = false;
-    let attempts = 0;
     function observeSplitView() {
-        if (splitViewFound || attempts > 2) return;
-        attempts += 1;
-        waitForElement(selectors.splitHalf).then( splitHalf => {
-            observer.observe(splitHalf, config);
-            splitViewFound = true;
-        });
+        const splitViews = document.querySelectorAll(selectors.splitView);
+        splitViews.forEach( view => observer.observe(view, config));
     }
 
     // the topbar is an element that will mutate everytime a new email is opened (when not in split mode)
     waitForElement(selectors.topBar).then( topbar => observer.observe(topbar, config));
-    observeSplitView();
+    waitForElement(selectors.splitView).then(observeSplitView);
 
     // observe the body until the compose container appears (all compose drafts are children of this container)
     // once it does we can observe it specifically for new compose drafts
@@ -414,6 +410,10 @@ function init() {
 
     bodyObserver.observe(document.body, {attributes: true});
 
+    // some labels have their own splitView divs, this makes sure we observe any new ones
+    waitForElement(selectors.splitViewContainer).then( div => {
+        new MutationObserver(observeSplitView).observe(div, {childList: true});
+    });
 }
 
 function main() {
