@@ -96,20 +96,20 @@ Inside of a supported environment, you can use any of the many other functions p
 * :gem: Features:
   * Support for other popular email services
     * Each email service would be an independent userscript, not all in one.
-    * Outlook
-    * iCloud
-    * Yahoo
-    * Thunderbird - [I think it may be possible w/ this add-on](https://addons.thunderbird.net/en-US/thunderbird/addon/userchromejs-2/)
-    * Protonmail
-    * GMX
-    * Libero
-    * Zoho
-    * Naver
-    * QQ Mail
-    * Line Mail
-    * Rediffmail
-    * Yandex
-    * AOL
+      * Outlook
+      * iCloud
+      * Yahoo
+      * Thunderbird - [I think it may be possible w/ this add-on](https://addons.thunderbird.net/en-US/thunderbird/addon/userchromejs-2/)
+      * Protonmail
+      * AOL
+      * GMX
+      * Libero
+      * Zoho
+      * Naver
+      * QQ Mail
+      * Line Mail
+      * Rediffmail
+      * Yandex
 * :knot: Stretch Goals:
   * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
     * [npmjs](https://www.npmjs.com/package/tikzjax/v/1.0.2?activeTab=code) - src folder currently missing tikzjax.js
