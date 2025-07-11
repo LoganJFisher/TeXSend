@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            TeXSend-Gmail
-// @version         6.1.12
+// @version         6.1.13
 // @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -102,6 +102,25 @@ function buildRegex(delims) {
     return new RegExp(expressions.join('|'), 'gs');
 }
 
+// Chrome-compatible HTML creation
+function createSafeHTML(html) {
+    if (typeof window !== 'undefined' && window.trustedTypes) {
+        if (window.trustedTypes.defaultPolicy) {
+            return window.trustedTypes.defaultPolicy.createHTML(html);
+        }
+        // Try to create a policy for Chrome
+        try {
+            const policy = window.trustedTypes.createPolicy('texsend-gmail', {
+                createHTML: (string) => string
+            });
+            return policy.createHTML(html);
+        } catch (e) {
+            // If policy creation fails, return original HTML
+            return html;
+        }
+    }
+    return html;
+}
 
 function renderLatex(html) {
     html = html.replace(/<wbr>/gs, ''); // fixes parsing of long expressions (GMAIL inserts <wbr> tags for some reason)
@@ -127,10 +146,11 @@ function updateLatex(messageList, state) {
 
         if (state && !message.rendered) {
             message.oldHTML = message.innerHTML;
-            message.innerHTML = renderLatex(message.innerHTML);
+            const renderedHTML = renderLatex(message.innerHTML);
+            message.innerHTML = createSafeHTML(renderedHTML);
             message.rendered = true;
         } else {
-            message.oldHTML && (message.innerHTML = message.oldHTML);
+            message.oldHTML && (message.innerHTML = createSafeHTML(message.oldHTML));
             message.rendered = false;
         }
     });
@@ -142,6 +162,26 @@ function updateLatex(messageList, state) {
 
 let MESSAGES_TOGGLE = true;
 
+// Chrome-compatible element creation
+function createElementCompat(parent, tag, attributes) {
+    try {
+        // Try GM_addElement first (works in Firefox/Greasemonkey)
+        return GM_addElement(parent, tag, attributes);
+    } catch (e) {
+        // Fallback for Chrome/Tampermonkey
+        const element = document.createElement(tag);
+        Object.entries(attributes).forEach(([key, value]) => {
+            if (key === 'textContent') {
+                element.textContent = value;
+            } else {
+                element.setAttribute(key, value);
+            }
+        });
+        parent.appendChild(element);
+        return element;
+    }
+}
+
 /*
 Adds the toggle button next to the `Move to` button
 copy the classes/structure of native buttons to avoid the many styling issues (compatibility with different themes & darkreader)
@@ -151,18 +191,18 @@ function addMessageToggleButton() {
     if (!moveBtn || moveBtn.parentElement.processed) return;
 
     const parent = moveBtn.parentElement;
-    const latexButton = GM_addElement(parent, 'div', {
+    const latexButton = createElementCompat(parent, 'div', {
         id: 'latex_toggle_message_button',
         role: 'button',
         'data-tooltip': 'Toggle LaTeX',
     });
 
-    const logoDiv = GM_addElement(latexButton, 'div', {
+    const logoDiv = createElementCompat(latexButton, 'div', {
         class: 'asa',
         style: 'width: 20px; height: 20px; display: inline-flex; align-items: end',
     });
 
-    logoDiv.innerHTML = katex.renderToString('\\footnotesize \\TeX', {throwOnError: false});
+    logoDiv.innerHTML = createSafeHTML(katex.renderToString('\\footnotesize \\TeX', {throwOnError: false}));
 
     latexButton.addEventListener('click', toggleMessages);
     latexButton.addEventListener('mouseover', () => latexButton.classList.add('T-I-JW'));
@@ -237,14 +277,14 @@ function toggleDraft(draft, state=null) {
 function addDraftToggleButton(draft) {
     const buttonContainer = draft.querySelector(selectors.draftButtonContainer);
     if (!buttonContainer) return;
-    const button = GM_addElement(buttonContainer, 'div', {
+    const button = createElementCompat(buttonContainer, 'div', {
         id: 'latex_toggle_draft_button',
         class: 'J-Z-I',
         role: 'button',
         'data-tooltip': 'Toggle LaTeX',
     });
 
-    button.innerHTML = katex.renderToString('\\footnotesize \\TeX', {throwOnError: false});
+    button.innerHTML = createSafeHTML(katex.renderToString('\\footnotesize \\TeX', {throwOnError: false}));
 
     button.addEventListener('click', () => toggleDraft(draft));
     draft.addEventListener('keydown', draftShortcutHandler, true);
@@ -252,7 +292,7 @@ function addDraftToggleButton(draft) {
 
 function addBanner(draft) {
     const parent = draft.querySelector('td:has(> form)');
-    const bannerDiv = GM_addElement(document.body, 'div', {
+    const bannerDiv = createElementCompat(document.body, 'div', {
         textContent: 'Disable LaTeX to edit draft',
         id: 'latex_draft_banner',
         style: 'display: none;',
@@ -318,19 +358,21 @@ function addShortcuts() {
         } else if (event.shiftKey && event.keyCode === 191) { //'?'
             waitForElement(selectors.shortcutMenu, 5).then(d => {
                 const row = document.evaluate(xpath, d, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-                row.outerHTML = msg_ShortcutHTML + draft_ShortcutHTML;
+                if (row) {
+                    row.outerHTML = msg_ShortcutHTML + draft_ShortcutHTML;
+                }
             });
         }
     });
 }
 
 function addStyles() {
-    GM_addElement('link', {
-        rel: "stylesheet",
-        href: "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.css"
-    });
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.css';
+    document.head.appendChild(link);
 
-    GM_addStyle(`
+    const css = `
         .katex-display {
             max-width: 99%;
         }
@@ -368,7 +410,16 @@ function addStyles() {
             position: sticky;
             bottom: 0;
         }
-    `);
+    `;
+
+    try {
+        GM_addStyle(css);
+    } catch (e) {
+        // Fallback for Chrome
+        const style = document.createElement('style');
+        style.textContent = css;
+        document.head.appendChild(style);
+    }
 }
 
 // ===================================================================================================
@@ -417,11 +468,16 @@ function init() {
 }
 
 function main() {
-    // allows modifying the html on gmail
+    // Handle Trusted Types for Chrome - moved to the beginning
     if (window.trustedTypes && window.trustedTypes.createPolicy && !window.trustedTypes.defaultPolicy) {
-        window.trustedTypes.createPolicy('default', {
-            createHTML: string => string
-        });
+        try {
+            window.trustedTypes.createPolicy('default', {
+                createHTML: string => string
+            });
+        } catch (e) {
+            // Chrome might not allow default policy, that's okay
+            console.log('TeXSend: Could not create default Trusted Types policy');
+        }
     }
 
     addStyles();
