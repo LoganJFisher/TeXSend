@@ -43,6 +43,10 @@ This requires the use of a browser script manager. Some examples are listed belo
 * [Opera](https://github.com/OpenUserJs/OpenUserJS.org/wiki/Violentmonkey-for-Opera)
 * [Safari](https://apps.apple.com/us/app/meddlemonkey/id1539631953?mt=12)
 
+> [!IMPORTANT]
+> * Your browser may require you to enable userscripts in the settings for that extension.
+> * For example, in Chrome: [Puzzle Piece Icon] > Manage Extensions > Tampermonkey / Details > Allow User Scripts
+
 Once you have a browser script manager extension installed on your browser, click the following link for your email service:
 * [Gmail](https://github.com/LoganJFisher/TeXSend/raw/refs/heads/main/TeXSend-Gmail.user.js)
 
