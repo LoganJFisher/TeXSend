@@ -36,8 +36,8 @@ Everything that is on the [KaTeX Support Table](https://katex.org/docs/support_t
 <details>
 <summary>:wrench: Installation Guide:</summary>
 
-This requires the use of a browser script manager. Violentmonkey is recommended, but other options should also be compatible.
-* [Chrome](https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag)
+This requires the use of a browser script manager. Some examples are listed below, but in principle any browser script manager should function.
+* [Chrome](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
 * [Firefox](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/)
 * [Edge](https://microsoftedge.microsoft.com/addons/detail/violentmonkey/eeagobfjdenkkddmbclomhiblgggliao)
 * [Opera](https://github.com/OpenUserJs/OpenUserJS.org/wiki/Violentmonkey-for-Opera)
