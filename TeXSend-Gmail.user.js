@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            TeXSend-Gmail
-// @version         6.1.13
+// @version         6.2.0
 // @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -13,6 +13,8 @@
 // @grant           GM_registerMenuCommand
 // @grant           GM_addElement
 // @grant           GM_addStyle
+// @grant           GM_getValue
+// @grant           GM_setValue
 // @require         https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js
 // @require         https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/mhchem.min.js
 // @require         https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js
@@ -38,7 +40,12 @@ const selectors = {
     shortcutMenu: 'body > div.wa:not(.aou) > div[role=alert]',
 }
 
-const DELIMITERS = [
+// State for dollar sign delimiters (default: true, persistent)
+let DOLLAR_DELIMITERS_ENABLED = GM_getValue('dollarDelimitersEnabled', true);
+
+const BASE_DELIMITERS = [
+    {left: '$$' , right: '$$' , display: true, includeDelimiter: false},
+    {left: '$' , right: '$' , display: false, includeDelimiter: false},
     {left: '[(;' , right: ';)]' , display: true, includeDelimiter: false},
     {left: '\\[' , right: '\\]' , display: true, includeDelimiter: false},
     {left: '[;' , right: ';]' , display: false, includeDelimiter: false},
@@ -79,11 +86,21 @@ const DELIMITERS = [
     {left: '\\begin{vmatrix*}' , right: '\\end{vmatrix*}', display: true, includeDelimiter: true},
 ]
 
+// Function to get current delimiters based on dollar sign state
+function getDelimiters() {
+    if (DOLLAR_DELIMITERS_ENABLED) {
+        return BASE_DELIMITERS;
+    } else {
+        // Return all delimiters except $$ and $
+        return BASE_DELIMITERS.slice(2);
+    }
+}
+
 // ===================================================================================================
 // Latex
 // ===================================================================================================
 
-const REGEX = buildRegex(DELIMITERS);
+let REGEX = buildRegex(getDelimiters());
 
 /*
 Build one BIG regex from all the delimiters. (using disjunction `|` aka OR)
@@ -100,6 +117,34 @@ function buildRegex(delims) {
     })
 
     return new RegExp(expressions.join('|'), 'gs');
+}
+
+// Function to toggle dollar sign delimiters
+function toggleDollarDelimiters() {
+    DOLLAR_DELIMITERS_ENABLED = !DOLLAR_DELIMITERS_ENABLED;
+    GM_setValue('dollarDelimitersEnabled', DOLLAR_DELIMITERS_ENABLED);
+
+    // Rebuild regex with new delimiter set
+    REGEX = buildRegex(getDelimiters());
+
+    // Refresh all messages and drafts to apply the change
+    refreshMessages();
+
+    // Refresh any visible drafts
+    const draftsContainer = document.querySelector(selectors.draftsContainer);
+    if (draftsContainer) {
+        const drafts = draftsContainer.querySelectorAll(selectors.draftRegion);
+        drafts.forEach(draft => {
+            const draftBody = draft.querySelector(selectors.draftBody);
+            if (draftBody && draftBody.rendered) {
+                // If draft is currently rendered, re-render it with new delimiters
+                toggleDraft(draft, false); // Turn off
+                toggleDraft(draft, true);  // Turn back on
+            }
+        });
+    }
+
+    console.log(`Dollar sign delimiters ${DOLLAR_DELIMITERS_ENABLED ? 'enabled' : 'disabled'}`);
 }
 
 // Chrome-compatible HTML creation
@@ -483,6 +528,7 @@ function main() {
     addStyles();
     addShortcuts();
     GM_registerMenuCommand('Toggle LaTeX', toggleMessages);
+    GM_registerMenuCommand('Toggle $ & $$ Delimiters', toggleDollarDelimiters);
     init();
 }
 
