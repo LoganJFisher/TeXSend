@@ -71,13 +71,17 @@ $~~~~$:accessibility: `Ctrl+Alt+K` shortcut to toggle compiling in an active dra
 
 $~~~~$**Additional supported math environment delimiters beyond KaTeX:**
 * Inline mode:
+  * `$...$`
   * `[; ... ;]`
   * `\( ... \)`
   * `\begin{math} ... \end{math}`
 * Display mode:
+  * `$$...$$`
   * `[(; ... ;)]`
   * `\[ ... \]`
   * `\begin{displaymath} ... \end{displaymath}`
+ 
+:heavy_dollar_sign: Note that $ and $$ delimiters are enabled by default, but can be toggled by clicking "Toggle $ & $$ Delimiters" within your chosen browser script manager. This was implemented to accomodate emails that may contain references to multiple dollar currency amounts while also containing LaTeX not in dollar sign delimiters. There are still edge cases that this won't solve, like if the LaTeX is also in dollar sign delimiters, but it's as good of a solution as could be conceived.
 
 :bulb: Use `\displaystyle` inside inline delimiters to compile as display mode with line breaks. <br>
 $~~~~~~$ Example: `\(\displaystyle E=mc^{2}\)`
