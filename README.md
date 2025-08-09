@@ -121,6 +121,7 @@ Inside of a supported environment, you can use any of the many other functions p
       * Rediffmail
       * Yandex
 * :knot: Stretch Goals:
+  * Convert the entire TeXSend suite into a browser extension compatible with all major browsers.
   * Add [TikZJax](https://github.com/kisonecat/tikzjax) support.
     * [npmjs](https://www.npmjs.com/package/tikzjax/v/1.0.2?activeTab=code) - src folder currently missing tikzjax.js
     * TikZ uses `\begin{tikzpicture}` delimiters.
