@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            TeXSend-Gmail
-// @version         6.2.1
+// @version         6.2.2
 // @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -119,6 +119,17 @@ function buildRegex(delims) {
     return new RegExp(expressions.join('|'), 'gs');
 }
 
+// Function to toggle the default MESSAGES_TOGGLE state
+function toggleDefaultMessagesState() {
+    MESSAGES_TOGGLE = !MESSAGES_TOGGLE;
+    GM_setValue('messagesToggleDefault', MESSAGES_TOGGLE);
+
+    // Refresh messages to apply the new state
+    refreshMessages();
+
+    console.log(`Default message LaTeX rendering ${MESSAGES_TOGGLE ? 'enabled' : 'disabled'}`);
+}
+
 // Function to toggle dollar sign delimiters
 function toggleDollarDelimiters() {
     DOLLAR_DELIMITERS_ENABLED = !DOLLAR_DELIMITERS_ENABLED;
@@ -205,7 +216,7 @@ function updateLatex(messageList, state) {
 // MESSAGES
 // ===================================================================================================
 
-let MESSAGES_TOGGLE = false;
+let MESSAGES_TOGGLE = GM_getValue('messagesToggleDefault', false);
 
 // Chrome-compatible element creation
 function createElementCompat(parent, tag, attributes) {
@@ -528,6 +539,7 @@ function main() {
     addStyles();
     addShortcuts();
     GM_registerMenuCommand('Toggle LaTeX', toggleMessages);
+    GM_registerMenuCommand('Toggle Default State', toggleDefaultMessagesState);
     GM_registerMenuCommand('Toggle $ & $$ Delimiters', toggleDollarDelimiters);
     init();
 }
