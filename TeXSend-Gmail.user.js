@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            TeXSend-Gmail
-// @version         6.2.0
+// @version         6.2.1
 // @description     Adds a button to Gmail which toggles LaTeX compiling
 // @author          Logan J. Fisher & GTK & MistralMireille
 // @license         MIT
@@ -205,7 +205,7 @@ function updateLatex(messageList, state) {
 // MESSAGES
 // ===================================================================================================
 
-let MESSAGES_TOGGLE = true;
+let MESSAGES_TOGGLE = false;
 
 // Chrome-compatible element creation
 function createElementCompat(parent, tag, attributes) {
