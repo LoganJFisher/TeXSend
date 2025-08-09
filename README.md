@@ -80,6 +80,8 @@ $~~~~$**Additional supported math environment delimiters beyond KaTeX:**
   * `[(; ... ;)]`
   * `\[ ... \]`
   * `\begin{displaymath} ... \end{displaymath}`
+
+:on: Note that the default state of TexSend (i.e., whether it automatically enables render upon loading your email service) can be toggled by clicking "Toggle Default State" within your chosen browser script manager. This was implemented to accomodate user choice between avoiding messing up emails that don't contain any TeX but happen to contain delimiters (most notably, $), and the convenience of not having to toggle on LaTeX compiling on every load-in.
  
 :heavy_dollar_sign: Note that $ and $$ delimiters are enabled by default, but can be toggled by clicking "Toggle $ & $$ Delimiters" within your chosen browser script manager. This was implemented to accomodate emails that may contain references to multiple dollar currency amounts while also containing LaTeX not in dollar sign delimiters. There are still edge cases that this won't solve, like if the LaTeX is also in dollar sign delimiters, but it's as good of a solution as could be conceived.
 
